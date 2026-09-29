@@ -1,0 +1,476 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nodirbek Makhtumov — AI/ML Engineer</title>
+<meta name="description" content="AI/ML engineer shipping production computer vision on edge hardware — detection, segmentation, video intelligence on NVIDIA Jetson, Raspberry Pi and Hailo-8.">
+<meta property="og:title" content="Nodirbek Makhtumov — AI/ML Engineer">
+<meta property="og:description" content="Production computer vision on edge hardware. Daejeon, South Korea.">
+<meta property="og:image" content="https://nodir0705.github.io/assets/photo.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&family=Martian+Mono:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0a0c0b; --panel:#101412; --line:#1f2724; --dim:#7d8a84; --text:#dfe7e2; --hi:#ffffff;
+  --box:#3dff8e; --box-dim:#3dff8e33; --amber:#ffb547;
+  --mono:"Martian Mono",ui-monospace,monospace; --sans:"Archivo",sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg); color:var(--text); font:400 17px/1.6 var(--sans); font-stretch:100%;
+  background-image:
+    linear-gradient(var(--line) 1px,transparent 1px),
+    linear-gradient(90deg,var(--line) 1px,transparent 1px);
+  background-size:64px 64px; background-position:-1px -1px;
+  background-attachment:fixed;
+}
+body::before{ /* vignette over the grid */
+  content:""; position:fixed; inset:0; pointer-events:none; z-index:-1;
+  background:radial-gradient(ellipse at 30% 20%,transparent 0%,var(--bg) 75%);
+}
+a{color:inherit}
+.wrap{max-width:1120px;margin:0 auto;padding:0 24px}
+.mono{font-family:var(--mono);font-size:12px;letter-spacing:.02em}
+::selection{background:var(--box);color:#000}
+
+/* ---------- detection-box primitive: corner brackets ---------- */
+.bbox{position:relative}
+.bbox::before,.bbox::after{
+  content:""; position:absolute; width:18px; height:18px; pointer-events:none;
+  border:2px solid var(--box);
+}
+.bbox::before{top:-1px;left:-1px;border-right:0;border-bottom:0}
+.bbox::after{bottom:-1px;right:-1px;border-left:0;border-top:0}
+.tag{
+  display:inline-block; background:var(--box); color:#04140b; font:600 11px/1 var(--mono);
+  padding:5px 7px; letter-spacing:.03em; white-space:nowrap;
+}
+.tag.amber{background:var(--amber)}
+
+/* ---------- nav ---------- */
+nav{position:sticky;top:0;z-index:10;background:#0a0c0bd9;backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;height:56px;gap:16px}
+nav .id{font:700 15px var(--sans);font-stretch:115%;letter-spacing:.04em;text-decoration:none}
+nav .id b{color:var(--box)}
+nav ul{display:flex;gap:22px;list-style:none}
+nav ul a{font:400 12px var(--mono);color:var(--dim);text-decoration:none;transition:color .2s}
+nav ul a:hover{color:var(--box)}
+
+/* ---------- hero ---------- */
+.hero{padding:88px 0 72px}
+.hero .wrap{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:64px;align-items:center}
+.eyebrow{color:var(--box);margin-bottom:22px}
+.eyebrow::before{content:"● ";animation:blink 1.6s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+h1{
+  font:800 clamp(34px,6vw,80px)/.92 var(--sans); font-stretch:125%; color:var(--hi);
+  letter-spacing:-.01em; text-transform:uppercase;
+}
+h1 span{display:block;color:transparent;-webkit-text-stroke:1.5px var(--text)}
+.lede{margin-top:28px;max-width:560px;font-size:19px;color:#b9c4be}
+.lede strong{color:var(--hi);font-weight:600}
+.cta{margin-top:34px;display:flex;flex-wrap:wrap;gap:12px}
+.btn{
+  font:600 12px var(--mono); text-decoration:none; padding:13px 18px; border:1px solid var(--line);
+  background:var(--panel); transition:border-color .2s,color .2s,background .2s;
+}
+.btn:hover{border-color:var(--box);color:var(--box)}
+.btn.primary{background:var(--box);color:#04140b;border-color:var(--box)}
+.btn.primary:hover{background:transparent;color:var(--box)}
+
+.portrait{justify-self:center;width:280px}
+.portrait figure{padding:14px;position:relative}
+.portrait img{display:block;width:100%;aspect-ratio:260/356;object-fit:cover;filter:grayscale(.2) contrast(1.05)}
+.portrait .tag{position:absolute;top:-12px;left:14px}
+.portrait figcaption{margin-top:14px;color:var(--dim);display:grid;grid-template-columns:auto 1fr;gap:2px 12px}
+.portrait figcaption b{color:var(--text);font-weight:400}
+/* draw-in animation for the hero box */
+.portrait .bbox::before,.portrait .bbox::after{width:0;height:0;animation:grow .9s .3s cubic-bezier(.2,.8,.2,1) forwards}
+@keyframes grow{to{width:100%;height:100%}}
+.scan{position:absolute;left:14px;right:14px;top:14px;height:2px;background:var(--box);box-shadow:0 0 18px var(--box);opacity:.8;animation:scan 2.4s 1.1s ease-in-out forwards;transform-origin:left}
+@keyframes scan{0%{top:14px}90%{opacity:.8}100%{top:calc(100% - 60px);opacity:0}}
+
+/* ---------- metrics strip ---------- */
+.metrics{border-block:1px solid var(--line);background:var(--panel)}
+.metrics .wrap{display:grid;grid-template-columns:repeat(5,1fr)}
+.metric{padding:26px 18px;border-left:1px solid var(--line)}
+.metric:last-child{border-right:1px solid var(--line)}
+.metric .v{font:800 34px/1 var(--sans);font-stretch:112%;color:var(--hi)}
+.metric .v small{font-size:.5em;color:var(--box);margin-left:2px}
+.metric .k{margin-top:10px;color:var(--dim);font-size:11px;line-height:1.5}
+
+/* ---------- sections ---------- */
+section{padding:96px 0 24px}
+.sec-head{display:flex;align-items:baseline;gap:18px;margin-bottom:48px;flex-wrap:wrap}
+.sec-head .n{color:var(--box)}
+h2{font:800 clamp(30px,4.4vw,50px)/1 var(--sans);font-stretch:118%;text-transform:uppercase;color:var(--hi)}
+.sec-head p{color:var(--dim);flex-basis:100%}
+
+/* ---------- case studies ---------- */
+.case{
+  display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:44px;padding:40px;margin-bottom:28px;
+  background:var(--panel);border:1px solid var(--line);
+  opacity:0;transform:translateY(24px);transition:opacity .7s,transform .7s,border-color .3s;
+}
+.case.in{opacity:1;transform:none}
+.case:hover{border-color:#2d3a35}
+.case .top{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px}
+.case h3{font:700 28px/1.1 var(--sans);font-stretch:108%;color:var(--hi);margin-bottom:16px}
+.case dl{display:grid;gap:12px}
+.case dt{color:var(--box);font:400 11px var(--mono);text-transform:uppercase;letter-spacing:.08em}
+.case dd{color:#b9c4be;font-size:16px}
+.case dd b{color:var(--hi);font-weight:600}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:22px}
+.chips span{font:400 11px var(--mono);color:var(--dim);border:1px solid var(--line);padding:4px 8px}
+.case .links{margin-top:22px;display:flex;gap:10px;flex-wrap:wrap}
+
+.visual{display:flex;flex-direction:column;gap:18px;justify-content:center}
+.shot{padding:10px}
+.shot img{display:block;width:100%;height:auto}
+.shot .tag{position:absolute;top:-11px;left:10px}
+.result{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 14px;padding:18px 20px;border:1px dashed var(--box-dim)}
+.result .v{white-space:nowrap;font:800 clamp(32px,4vw,44px)/1 var(--sans);font-stretch:115%;color:var(--box)}
+.result .k{color:var(--dim);font-size:11px}
+
+/* pipeline diagram: vertical stack of stages */
+.pipe{list-style:none;display:flex;flex-direction:column;gap:16px;counter-reset:s}
+.pipe li{
+  position:relative;padding:10px 14px;border:1px solid var(--line);background:var(--bg);
+  font:400 12px/1.45 var(--mono);color:var(--text);
+}
+.pipe li::before{counter-increment:s;content:"0" counter(s);color:var(--box);font-size:10px;margin-right:14px}
+.pipe li:not(:last-child)::after{content:"↓";position:absolute;left:22px;bottom:-16px;color:var(--box);font-size:11px;line-height:16px}
+.pipe li.key{border-color:var(--box);box-shadow:inset 0 0 0 1px var(--box-dim)}
+
+/* ---------- skills ---------- */
+.skills{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line)}
+.skill{background:var(--panel);padding:26px 22px}
+.skill h4{font:600 11px var(--mono);color:var(--box);text-transform:uppercase;letter-spacing:.08em;margin-bottom:14px}
+.skill ul{list-style:none;display:grid;gap:6px;font-size:15px}
+
+/* ---------- timeline ---------- */
+.tl{border-left:1px solid var(--line);margin-left:6px}
+.tl-item{position:relative;padding:0 0 44px 36px}
+.tl-item::before{content:"";position:absolute;left:-6px;top:6px;width:11px;height:11px;background:var(--bg);border:2px solid var(--box)}
+.tl-item .when{color:var(--dim)}
+.tl-item h3{font:700 22px/1.2 var(--sans);font-stretch:108%;color:var(--hi);margin:6px 0 4px}
+.tl-item .org{color:var(--box);font-size:15px;margin-bottom:10px}
+.tl-item p{color:#b9c4be;max-width:760px}
+
+/* ---------- contact ---------- */
+.contact{padding:96px 0 120px}
+.contact .box{padding:56px 48px;text-align:left;background:var(--panel)}
+.contact .box .tag{position:absolute;top:-12px;left:24px}
+.contact h2{font-size:clamp(34px,6vw,72px)}
+.contact p{color:#b9c4be;margin:18px 0 30px;max-width:620px}
+.meta-row{margin-top:36px;display:flex;flex-wrap:wrap;gap:10px 28px;color:var(--dim)}
+footer{border-top:1px solid var(--line);padding:22px 0;color:var(--dim)}
+footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+
+/* ---------- load reveal ---------- */
+.rise{opacity:0;transform:translateY(14px);animation:rise .8s cubic-bezier(.2,.8,.2,1) forwards}
+.d1{animation-delay:.05s}.d2{animation-delay:.15s}.d3{animation-delay:.3s}.d4{animation-delay:.45s}
+@keyframes rise{to{opacity:1;transform:none}}
+
+/* ---------- responsive ---------- */
+@media (max-width:900px){
+  .hero .wrap,.case{grid-template-columns:1fr}
+  .hero{padding-top:56px}
+  .portrait{order:-1;width:min(70%,260px);justify-self:start}
+  .hero .wrap{grid-template-columns:1fr}
+  .metrics .wrap{grid-template-columns:repeat(2,1fr)}
+  .metric{border-bottom:1px solid var(--line)}
+  .skills{grid-template-columns:1fr 1fr}
+  .case{padding:28px 22px;gap:32px}
+  nav ul{display:none}
+}
+@media (max-width:560px){
+  .wrap{padding:0 16px}
+  body{font-size:16px}
+  h1{font-size:9.4vw}
+  .skills{grid-template-columns:1fr}
+  .contact .box{padding:40px 22px}
+  .metric .v{font-size:28px}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .rise,.case{opacity:1;transform:none}
+  .portrait .bbox::before,.portrait .bbox::after{width:18px;height:18px}
+  .scan{display:none}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <a class="id" href="#top">NODIR<b>.</b>M</a>
+    <ul>
+      <li><a href="#work">work</a></li>
+      <li><a href="#skills">skills</a></li>
+      <li><a href="#experience">experience</a></li>
+      <li><a href="#contact">contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="wrap">
+    <div>
+      <p class="eyebrow mono rise d1">DAEJEON, KR · E-7 VISA</p>
+      <h1 class="rise d2">Nodirbek<span>Makhtumov</span></h1>
+      <p class="lede rise d3">AI/ML engineer shipping <strong>production computer vision on edge hardware</strong>: detection, segmentation and real-time video intelligence. I train and adapt the models, compress them for <strong>NVIDIA Jetson</strong> with TensorRT and ONNX, and build the services around them.</p>
+      <div class="cta rise d4">
+        <a class="btn primary" href="#work">See the work ↓</a>
+        <a class="btn" href="assets/Nodirbek_Makhtumov_Resume.pdf" target="_blank" rel="noopener">Résumé · EN</a>
+        <a class="btn" href="assets/Nodirbek_Makhtumov_Resume_KR.pdf" target="_blank" rel="noopener">이력서 · KR</a>
+        <a class="btn" href="https://github.com/nodir0705" target="_blank" rel="noopener">GitHub</a>
+      </div>
+    </div>
+    <div class="portrait rise d2">
+      <figure class="bbox">
+        <span class="tag">engineer 0.99</span>
+        <img src="assets/photo.jpg" alt="Portrait of Nodirbek Makhtumov">
+        <span class="scan" aria-hidden="true"></span>
+        <figcaption class="mono">
+          <span>role</span><b>AI/ML Engineer</b>
+          <span>at</span><b>Netvision Telecom</b>
+          <span>focus</span><b>CV · Edge AI · Video</b>
+        </figcaption>
+      </figure>
+    </div>
+  </div>
+</header>
+
+<div class="metrics">
+  <div class="wrap">
+    <div class="metric"><div class="v">25<small>+FPS</small></div><div class="k mono">across 4 concurrent camera streams</div></div>
+    <div class="metric"><div class="v">−30<small>%</small></div><div class="k mono">GPU memory on Jetson Orin NX</div></div>
+    <div class="metric"><div class="v">92<small>%</small></div><div class="k mono">truck-ID OCR accuracy, up from 76%</div></div>
+    <div class="metric"><div class="v">8.6<small>×</small></div><div class="k mono">faster face pipeline on Hailo-8 NPU</div></div>
+    <div class="metric"><div class="v">1<small>st</small></div><div class="k mono">of 200+ teams, capstone I mentored</div></div>
+  </div>
+</div>
+
+<main>
+<section id="work">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="n mono">// 01</span><h2>Selected work</h2>
+      <p class="mono">Production systems from Netvision Telecom and freelance contracts, plus open-source projects.</p>
+    </div>
+
+    <!-- To add a demo image/GIF to any case: put it in assets/work/ and add
+         <figure class="shot bbox"><span class="tag">demo</span><img src="assets/work/NAME" alt="..."></figure>
+         at the top of that case's .visual block. -->
+
+    <article class="case">
+      <div>
+        <div class="top"><span class="tag">production</span><span class="tag amber">Netvision Telecom</span></div>
+        <h3>Edge-aware segmentation pipeline</h3>
+        <dl>
+          <dt>Problem</dt><dd>Extract stable, precise object boundaries, including curved edges, from several live cameras at once on edge hardware.</dd>
+          <dt>Approach</dt><dd>Lightweight segmentation model, <b>RANSAC-based boundary extraction</b> and a <b>custom point-stabilization algorithm</b> for curved edges. Served through FastAPI, with inference metadata logged to PostgreSQL.</dd>
+          <dt>Result</dt><dd>Stable <b>25+ FPS across 4 concurrent streams</b>, built end to end.</dd>
+        </dl>
+        <div class="chips"><span>PyTorch</span><span>OpenCV</span><span>RANSAC</span><span>FastAPI</span><span>PostgreSQL</span><span>Docker</span></div>
+      </div>
+      <div class="visual">
+        <ol class="pipe">
+          <li>4× camera streams</li>
+          <li>Segmentation model</li>
+          <li class="key">RANSAC boundary</li>
+          <li class="key">Point stabilizer</li>
+          <li>FastAPI + Postgres</li>
+        </ol>
+        <div class="result"><span class="v">25+ FPS</span><span class="k mono">× 4 streams, sustained</span></div>
+      </div>
+    </article>
+
+    <article class="case">
+      <div>
+        <div class="top"><span class="tag">production</span><span class="tag amber">Netvision Telecom</span></div>
+        <h3>Smart trash-truck vision</h3>
+        <dl>
+          <dt>Problem</dt><dd>Classify trash and estimate its volume on the truck itself, within the memory budget of an embedded GPU.</dd>
+          <dt>Approach</dt><dd>YOLO models for trash classification and volume estimation. <b>Replaced the YOLOv8 backbone with ResNet50</b>, then optimized and deployed the model for on-truck edge inference.</dd>
+          <dt>Result</dt><dd><b>~30% lower GPU memory</b> on NVIDIA Jetson Orin NX.</dd>
+        </dl>
+        <div class="chips"><span>YOLOv8</span><span>ResNet50</span><span>TensorRT</span><span>ONNX</span><span>Jetson Orin NX</span></div>
+      </div>
+      <div class="visual">
+        <ol class="pipe">
+          <li>Truck camera</li>
+          <li class="key">YOLOv8 head + ResNet50 backbone</li>
+          <li>Class + volume</li>
+          <li>On-truck edge inference</li>
+        </ol>
+        <div class="result"><span class="v">−30%</span><span class="k mono">GPU memory · Orin NX</span></div>
+      </div>
+    </article>
+
+    <article class="case">
+      <div>
+        <div class="top"><span class="tag">internal tool</span><span class="tag amber">Netvision Telecom</span></div>
+        <h3>SAM2 video auto-labeler</h3>
+        <dl>
+          <dt>Problem</dt><dd>Labeling video frame by frame is the bottleneck for every new CV model.</dd>
+          <dt>Approach</dt><dd>From a <b>single bounding-box or mask prompt</b>, SAM2 propagates consistent labels across the entire video and exports annotated images and label files ready for training.</dd>
+          <dt>Result</dt><dd>Raw footage becomes a training dataset from one prompt per object.</dd>
+        </dl>
+        <div class="chips"><span>SAM2</span><span>PyTorch</span><span>OpenCV</span><span>Dataset export</span></div>
+      </div>
+      <div class="visual">
+        <ol class="pipe">
+          <li>Raw video</li>
+          <li>1 box / mask prompt</li>
+          <li class="key">SAM2 propagation</li>
+          <li>Images + labels</li>
+        </ol>
+        <div class="result"><span class="v">1 prompt</span><span class="k mono">→ full-video labels</span></div>
+      </div>
+    </article>
+
+    <article class="case">
+      <div>
+        <div class="top"><span class="tag">delivered</span><span class="tag amber">Freelance contract</span></div>
+        <h3>Smart truck parking &amp; truck-ID recognition</h3>
+        <dl>
+          <dt>Problem</dt><dd>Read custom truck IDs and monitor parking occupancy in real time, outdoors, from skewed camera angles.</dd>
+          <dt>Approach</dt><dd>YOLO detection of trucks and custom ID regions, a <b>custom deskewing pipeline</b> in front of EasyOCR, and live occupancy data streamed to the backend.</dd>
+          <dt>Result</dt><dd>Truck-ID recognition <b>76% → 92%</b> in real-world conditions.</dd>
+        </dl>
+        <div class="chips"><span>YOLO</span><span>EasyOCR</span><span>OpenCV</span><span>Real-time streaming</span></div>
+      </div>
+      <div class="visual">
+        <ol class="pipe">
+          <li>Parking cams</li>
+          <li>YOLO truck + ID ROI</li>
+          <li class="key">Deskew</li>
+          <li>EasyOCR</li>
+          <li>Live occupancy → backend</li>
+        </ol>
+        <div class="result"><span class="v">76→92%</span><span class="k mono">ID accuracy, field conditions</span></div>
+      </div>
+    </article>
+
+    <article class="case">
+      <div>
+        <div class="top"><span class="tag">open source</span><span class="tag amber">Freelance · MIT</span></div>
+        <h3>Face-recognition attendance kiosk</h3>
+        <dl>
+          <dt>Problem</dt><dd>The target hardware for an attendance kiosk wasn't decided, so the choice had to be backed by measurements.</dd>
+          <dt>Approach</dt><dd>The same RetinaFace + ArcFace pipeline built <b>three ways (Python, C++ and Hailo-8 NPU)</b> and benchmarked on identical hardware. Guided Face-ID-style enrollment, Flask kiosk and Google Sheets sync.</dd>
+          <dt>Result</dt><dd><b>5.59 ms</b> per face on Hailo-8 vs 48 ms on CPU: <b>8.6× faster, 95× tighter jitter</b>.</dd>
+        </dl>
+        <div class="chips"><span>InsightFace</span><span>ArcFace</span><span>C++</span><span>Hailo-8</span><span>Raspberry Pi 5</span><span>Flask</span><span>CI</span></div>
+        <div class="links"><a class="btn" href="https://github.com/Nodir0705/face-recognition" target="_blank" rel="noopener">View code →</a></div>
+      </div>
+      <div class="visual">
+        <figure class="shot bbox"><span class="tag">kiosk 5.59ms</span><img src="assets/work/kiosk.jpg" alt="Kiosk view with live recognition box and confirmation banner" loading="lazy" width="1280" height="960"></figure>
+      </div>
+    </article>
+
+    <article class="case">
+      <div>
+        <div class="top"><span class="tag">open source</span><span class="tag amber">OAK-D · DepthAI</span></div>
+        <h3>Depth-based box fill-level measurement</h3>
+        <dl>
+          <dt>Problem</dt><dd>Measuring from the single closest pixel in the ROI gives noisy, misleading fill readings.</dd>
+          <dt>Approach</dt><dd>Average depth over the whole ROI, with <b>two-point calibration</b> (empty and full box), for a real-time fullness percentage on an OAK-D stereo camera.</dd>
+          <dt>Result</dt><dd>Steady live fill level with an adjustable ROI.</dd>
+        </dl>
+        <div class="chips"><span>DepthAI</span><span>OAK-D</span><span>OpenCV</span><span>NumPy</span></div>
+        <div class="links"><a class="btn" href="https://github.com/Nodir0705/depthai-spatial-measurement" target="_blank" rel="noopener">View code →</a></div>
+      </div>
+      <div class="visual">
+        <figure class="shot bbox"><span class="tag">box 100.0%</span><img src="assets/work/depth.png" alt="Depth map with ROI rectangle and fill-level readout" loading="lazy" width="1282" height="817"></figure>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="wrap">
+    <div class="sec-head"><span class="n mono">// 02</span><h2>Toolkit</h2></div>
+    <div class="skills">
+      <div class="skill"><h4>Vision &amp; video</h4><ul>
+        <li>Object detection</li><li>Semantic / instance segmentation</li><li>Pose estimation</li><li>OCR (EasyOCR)</li><li>Multi-object tracking</li><li>SAM2 auto-labeling</li><li>Diffusion fine-tuning</li></ul></div>
+      <div class="skill"><h4>Training</h4><ul>
+        <li>PyTorch</li><li>TensorFlow / Keras</li><li>Ultralytics YOLO</li><li>Hugging Face Transformers</li><li>scikit-learn · OpenCV</li><li>W&amp;B · MLflow · TensorBoard</li></ul></div>
+      <div class="skill"><h4>Edge &amp; deploy</h4><ul>
+        <li>TensorRT · ONNX</li><li>Quantization · pruning</li><li>Jetson Orin Nano / NX</li><li>Raspberry Pi 4 / 5 · Hailo-8</li><li>Docker · FastAPI</li><li>Linux (Ubuntu)</li></ul></div>
+      <div class="skill"><h4>Languages</h4><ul>
+        <li>Python</li><li>C++</li><li>SQL · PostgreSQL</li><li>Git · GitHub · GitLab</li></ul></div>
+    </div>
+  </div>
+</section>
+
+<section id="experience">
+  <div class="wrap">
+    <div class="sec-head"><span class="n mono">// 03</span><h2>Experience</h2></div>
+    <div class="tl">
+      <div class="tl-item">
+        <span class="when mono">SEP 2023 — PRESENT</span>
+        <h3>AI/ML Engineer</h3>
+        <div class="org">Netvision Telecom · Daejeon</div>
+        <p>Production CV on edge hardware: segmentation pipelines, trash-truck vision, SAM2 labeling tooling. Model compression and deployment on NVIDIA Jetson.</p>
+      </div>
+      <div class="tl-item">
+        <span class="when mono">APR 2023 — SEP 2023</span>
+        <h3>Research Intern (paid)</h3>
+        <div class="org">Netvision Telecom · Daejeon</div>
+        <p>Built and deployed YOLO models on Jetson Orin Nano, applied latency optimization and quantization, and collected, normalized and labeled training datasets.</p>
+      </div>
+      <div class="tl-item">
+        <span class="when mono">CONTRACT</span>
+        <h3>Freelance AI/ML Engineer</h3>
+        <div class="org">Truck parking &amp; ID recognition · Attendance kiosk</div>
+        <p>Delivered end-to-end real-time vision systems for clients, from detection and OCR to on-device deployment.</p>
+      </div>
+      <div class="tl-item">
+        <span class="when mono">MENTOR</span>
+        <h3>Capstone Mentor</h3>
+        <div class="org">Woosong University</div>
+        <p>Guided a student team through a computer-vision capstone covering image processing and YOLO training. The team finished 1st among 200+ teams.</p>
+      </div>
+      <div class="tl-item">
+        <span class="when mono">2019 — 2023</span>
+        <h3>B.S. Computer Science</h3>
+        <div class="org">Woosong University · Daejeon</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <div class="wrap">
+    <div class="box bbox">
+      <span class="tag">contact 1.00</span>
+      <h2>Let's build<br>something that sees.</h2>
+      <p>Always happy to talk computer vision, edge AI and hard real-time problems. English fluent, Korean and Russian conversational, E-7 visa.</p>
+      <div class="cta">
+        <a class="btn primary" href="mailto:stark.developer2877@gmail.com">stark.developer2877@gmail.com</a>
+        <a class="btn" href="https://linkedin.com/in/nodirbek-makhtumov-03084a194" target="_blank" rel="noopener">LinkedIn</a>
+        <a class="btn" href="https://github.com/nodir0705" target="_blank" rel="noopener">GitHub</a>
+      </div>
+      <div class="meta-row mono"><span>EN · fluent</span><span>KR · conversational</span><span>RU · conversational</span><span>E-7 특정활동</span></div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer><div class="wrap mono"><span>© 2026 Nodirbek Makhtumov</span><span>Daejeon, South Korea</span></div></footer>
+
+<script>
+// reveal case studies on scroll
+const io = new IntersectionObserver(es => es.forEach(e => {
+  if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+}), {threshold: .12});
+document.querySelectorAll('.case').forEach(c => io.observe(c));
+</script>
+</body>
+</html>
