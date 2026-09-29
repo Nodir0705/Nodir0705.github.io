@@ -7,201 +7,99 @@
 <meta name="description" content="AI/ML engineer. Computer vision on edge hardware, RAG and agents, network security. Daejeon, South Korea.">
 <meta property="og:title" content="Nodirbek Makhtumov — AI/ML Engineer">
 <meta property="og:image" content="https://nodir0705.github.io/assets/photo.jpg">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/oatcake@1.0.0">
 <style>
-:root{--bg:#f6f4ef;--card:#fffdf8;--ink:#171717;--soft:#55524c;--dim:#8a867e;--line:#e3dfd6;--acc:#d9431e;
-  --sans:"Geist",system-ui,sans-serif;--mono:"Geist Mono",ui-monospace,monospace}
-@media (prefers-color-scheme:dark){:root{--bg:#121211;--card:#1a1a18;--ink:#ecebe7;--soft:#b3b0a8;--dim:#7d7a73;--line:#2b2a27;--acc:#ff6a3d}}
-*{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 var(--sans)}
-a{color:inherit}
-.wrap{max-width:60rem;margin:0 auto;padding:0 1.25rem}
-.mono{font-family:var(--mono);font-size:.78rem;letter-spacing:.01em}
-
-header{padding:4.5rem 0 2.5rem;display:flex;gap:2rem;align-items:center;justify-content:space-between}
-h1{font-size:clamp(2.2rem,6vw,3.6rem);line-height:1.05;letter-spacing:-.03em;margin:0 0 1rem;font-weight:700}
-h1 i{font-style:normal;color:var(--acc)}
-.lede{font-size:1.15rem;color:var(--soft);max-width:36rem;margin:0}
-.links{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1.6rem}
-.links a{font-family:var(--mono);font-size:.8rem;text-decoration:none;border:1px solid var(--line);background:var(--card);padding:.45rem .8rem;border-radius:999px;transition:border-color .15s,color .15s}
-.links a:hover{border-color:var(--acc);color:var(--acc)}
-.me{width:132px;height:132px;border-radius:50%;object-fit:cover;object-position:50% 20%;flex:none;border:3px solid var(--card);box-shadow:0 0 0 1px var(--line)}
-
-.nums{display:grid;grid-template-columns:repeat(5,1fr);border-block:1px solid var(--line);margin:1rem 0 1rem}
-.nums div{padding:1.2rem .9rem 1.1rem;border-right:1px solid var(--line)}
-.nums div:last-child{border-right:0}
-.nums b{display:block;font-size:1.7rem;letter-spacing:-.02em;line-height:1.1}
-.nums span{color:var(--dim)}
-
-h2{display:flex;align-items:baseline;gap:.8rem;font-size:1.5rem;letter-spacing:-.02em;margin:4rem 0 1.3rem}
-h2 .mono{color:var(--acc)}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
-.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:1.3rem 1.4rem 1.2rem;display:flex;flex-direction:column;transition:border-color .15s,transform .15s}
-.card:hover{border-color:color-mix(in srgb,var(--acc) 45%,var(--line));transform:translateY(-2px)}
-.card.wide{grid-column:1/-1}
-.card .meta{color:var(--dim);margin-bottom:.4rem}
-.card h3{font-size:1.12rem;margin:0 0 .45rem;letter-spacing:-.01em}
-.card p{margin:0 0 .9rem;color:var(--soft);font-size:.95rem}
-.card .hit{font-family:var(--mono);font-size:.9rem;color:var(--acc);margin-top:auto;padding-top:.2rem}
-.card .foot{display:flex;justify-content:space-between;gap:1rem;align-items:baseline;margin-top:.7rem;padding-top:.7rem;border-top:1px dashed var(--line);color:var(--dim)}
-.card .foot a{color:var(--ink);text-decoration:none;white-space:nowrap}
-.card .foot a:hover{color:var(--acc)}
-.card img{width:100%;border-radius:8px;margin-bottom:1rem;aspect-ratio:16/9;object-fit:cover;border:1px solid var(--line)}
-
-.rows{border-top:1px solid var(--line)}
-.row{display:grid;grid-template-columns:11rem 1fr;gap:1rem;padding:1rem 0;border-bottom:1px solid var(--line)}
-.row .mono{color:var(--dim);padding-top:.2rem}
-.row b{font-weight:600}.row p{margin:.2rem 0 0;color:var(--soft)}
-.stack{display:flex;flex-wrap:wrap;gap:.4rem}
-.stack span{font-family:var(--mono);font-size:.78rem;border:1px solid var(--line);background:var(--card);border-radius:6px;padding:.25rem .55rem}
-.stack em{font-style:normal;flex-basis:100%;color:var(--dim);font-family:var(--mono);font-size:.72rem;margin-top:.6rem;text-transform:uppercase;letter-spacing:.08em}
-.stack em:first-child{margin-top:0}
-footer{margin:5rem 0 3rem;color:var(--dim);display:flex;justify-content:space-between;flex-wrap:wrap;gap:.5rem}
-
-@media (max-width:760px){
-  header{flex-direction:column-reverse;align-items:flex-start;padding-top:2.5rem}
-  .me{width:96px;height:96px}
-  .nums{grid-template-columns:1fr 1fr}
-  .nums div{border-bottom:1px solid var(--line)}
-  .nums div:nth-child(2n){border-right:0}
-  .grid{grid-template-columns:1fr}
-  .row{grid-template-columns:1fr;gap:.2rem}
+/* layout adapted from binodil.github.io (sidecar on top of oatcake) */
+:root{--ok-color-fg:#374151}
+nav{display:flex;column-gap:var(--ok-line-height);max-width:50rem;margin:0 auto calc(4*var(--ok-line-height));padding:var(--ok-line-height) calc(2*var(--ok-line-height)) calc(var(--ok-line-height) - 1px);border-bottom:1px solid #ececec;text-transform:lowercase;overflow-x:auto}
+nav>*{flex-shrink:0}
+nav .space{margin-left:auto}
+nav a{color:inherit;text-decoration:none}nav a:hover{text-decoration:underline}
+.bio{display:flex;flex-direction:column;align-items:center;row-gap:var(--ok-line-height);max-width:28rem;margin:0 auto calc(4*var(--ok-line-height));text-align:center}
+.bio>*{margin:0;padding:0}
+.bio>img{width:calc(3*var(--ok-line-height));height:calc(3*var(--ok-line-height));border-radius:100%;border:none;object-fit:cover;object-position:50% 20%}
+.bio a{color:inherit}
+.bio,main{padding:0 calc(.5*var(--ok-line-height))}
+main{max-width:40rem;margin:0 auto}
+table{width:100%;margin:var(--ok-line-height) 0 calc(2*var(--ok-line-height))}
+caption{font-weight:bold;text-align:left}
+td{border-color:#ececec;vertical-align:top}
+table{table-layout:fixed}
+td:first-child{font-weight:bold;width:8.5rem;padding-right:var(--ok-line-height)}
+td b{font-weight:600}
+td small{color:#9ca3af}
+main>footer{margin-top:calc(3*var(--ok-line-height))}
+@media (max-width:50rem){
+  nav{column-gap:calc(.5*var(--ok-line-height));padding:calc(.5*var(--ok-line-height)) calc(.5*var(--ok-line-height)) calc(.5*var(--ok-line-height) - 1px)}
+  .bio{margin-bottom:calc(2*var(--ok-line-height))}
+  td:first-child{width:6.5rem}
 }
 </style>
 </head>
 <body>
-<div class="wrap">
 
 <header>
-  <div>
-    <h1>Nodirbek Makhtumov<i>.</i></h1>
-    <p class="lede">AI/ML engineer. I build ML that runs on real hardware: computer vision on Jetsons and NPUs, RAG and LLM pipelines on local models, and a network gateway that catches attacks. At Netvision Telecom, Daejeon.</p>
-    <nav class="links">
-      <a href="mailto:stark.developer2877@gmail.com">email</a>
-      <a href="https://github.com/Nodir0705">github</a>
-      <a href="https://linkedin.com/in/nodirbek-makhtumov-03084a194">linkedin</a>
-      <a href="assets/Nodirbek_Makhtumov_Resume.pdf">resume.pdf</a>
-      <a href="assets/Nodirbek_Makhtumov_Resume_KR.pdf">이력서.pdf</a>
-    </nav>
+  <nav>
+    <a style="font-weight:bold" href="/">Nodirbek Makhtumov</a>
+    <div class="space"></div>
+    <a href="#projects">Projects</a>
+    <a href="#work">Work</a>
+    <a href="assets/Nodirbek_Makhtumov_Resume.pdf">Resume</a>
+    <a href="https://github.com/Nodir0705">GitHub</a>
+  </nav>
+  <div class="bio">
+    <img alt="avatar" src="assets/photo.jpg">
+    <p>Nodirbek is an AI/ML engineer who puts models on real hardware: Jetsons, NPUs, network gateways. At Netvision Telecom, Daejeon.</p>
+    <p><a href="mailto:stark.developer2877@gmail.com">email</a> · <a href="https://linkedin.com/in/nodirbek-makhtumov-03084a194">linkedin</a> · <a href="assets/Nodirbek_Makhtumov_Resume_KR.pdf">이력서</a></p>
   </div>
-  <img class="me" src="assets/photo.jpg" alt="Nodirbek Makhtumov">
 </header>
 
-<section class="nums mono">
-  <div><b>25+ fps</b><span>4 camera streams</span></div>
-  <div><b>−30%</b><span>GPU memory, Orin NX</span></div>
-  <div><b>8.6×</b><span>faster on Hailo-8</span></div>
-  <div><b>76→92%</b><span>OCR accuracy</span></div>
-  <div><b>0.824</b><span>RAG recall@5</span></div>
-</section>
+<main>
+<!-- add a project: <tr><td>headline number</td><td>Name. One sentence. <small>context</small></td></tr> -->
 
-<!-- add a project: copy any <article class="card"> block. -->
+<table id="projects">
+  <caption>Computer vision &amp; edge</caption>
+  <tbody>
+    <tr><td>25+ fps</td><td><b>Rail-wheel gap measurement</b>. Segmentation + RANSAC boundary extraction + a point stabilizer for curved edges, across 4 concurrent camera streams. <small>Netvision</small></td></tr>
+    <tr><td>−30% GPU</td><td><b>Waste truck vision</b>. Swapped the YOLOv8 backbone for ResNet50 and moved its layers onto the Jetson Orin NX DLA. <small>Netvision</small></td></tr>
+    <tr><td>10×+</td><td><b>SAM2 video auto-labeler</b>. Prompt the first frame, labels propagate through the whole video, export to YOLO/COCO. <small>Netvision</small></td></tr>
+    <tr><td>76→92%</td><td><b>Truck-ID recognition</b>. Found perspective was the main failure mode and added a deskew stage in front of EasyOCR. <small>freelance, 2025</small></td></tr>
+    <tr><td>8.6×</td><td><a href="https://github.com/Nodir0705/face-recognition">Face-recognition kiosk</a>. Same pipeline in Python, C++ and on a Hailo-8 NPU: 48 → 5.59 ms per face on a Pi 5. <small>freelance, 2026</small></td></tr>
+    <tr><td>depth</td><td><a href="https://github.com/Nodir0705/depthai-spatial-measurement">Box fill level</a>. OAK-D stereo camera, ROI-averaged depth, two-point calibration.</td></tr>
+  </tbody>
+</table>
 
-<h2><span class="mono">01</span>Computer vision &amp; edge</h2>
-<div class="grid">
-  <article class="card">
-    <div class="meta mono">Netvision · production</div>
-    <h3>Rail-wheel gap measurement</h3>
-    <p>Lightweight segmentation, RANSAC boundary extraction and a point stabilizer for curved edges. Served over FastAPI with PostgreSQL logging.</p>
-    <div class="hit">25+ fps × 4 concurrent streams</div>
-  </article>
-  <article class="card">
-    <div class="meta mono">Netvision · production</div>
-    <h3>Waste truck vision</h3>
-    <p>YOLO waste classification and volume estimation on the truck. YOLOv8 backbone swapped for ResNet50 via 1×1 conv adapters, ResNet layers moved onto the Jetson DLA.</p>
-    <div class="hit">~30% less GPU memory on Orin NX</div>
-  </article>
-  <article class="card">
-    <div class="meta mono">Netvision · internal tool</div>
-    <h3>SAM2 video auto-labeler</h3>
-    <p>Prompt once on the first frame; labels propagate through the whole video and export to YOLO and COCO.</p>
-    <div class="hit">10×+ faster dataset building</div>
-  </article>
-  <article class="card">
-    <div class="meta mono">freelance · 2025</div>
-    <h3>Truck-ID recognition</h3>
-    <p>Error analysis showed perspective was the main failure mode, so I added a deskew stage (contours + perspective transform) before EasyOCR. Live parking occupancy over REST.</p>
-    <div class="hit">ID accuracy 76% → 92%</div>
-  </article>
-  <article class="card">
-    <img src="assets/work/kiosk.jpg" alt="Kiosk recognizing a face" loading="lazy">
-    <div class="meta mono">freelance · 2026</div>
-    <h3>Face-recognition kiosk</h3>
-    <p>Same RetinaFace + ArcFace pipeline written three ways (Python, C++, Hailo-8 NPU) and benchmarked on one Pi 5. Shipped on a Galaxy Tab.</p>
-    <div class="hit">48 → 5.59 ms per face, 95× less jitter</div>
-    <div class="foot mono"><span>InsightFace · C++ · Hailo-8</span><a href="https://github.com/Nodir0705/face-recognition">code →</a></div>
-  </article>
-  <article class="card">
-    <img src="assets/work/depth.png" alt="Depth map with fill-level readout" loading="lazy">
-    <div class="meta mono">personal</div>
-    <h3>Box fill level from depth</h3>
-    <p>OAK-D stereo camera. Average depth over the ROI instead of the closest pixel, calibrated with an empty box and a full one.</p>
-    <div class="hit">live fill % from one stereo camera</div>
-    <div class="foot mono"><span>DepthAI · OpenCV</span><a href="https://github.com/Nodir0705/depthai-spatial-measurement">code →</a></div>
-  </article>
-</div>
+<table>
+  <caption>RAG &amp; agents</caption>
+  <tbody>
+    <tr><td>0.824 R@5</td><td><b>HiKorea RAG</b>. Korean immigration Q&amp;A over 640 official documents: hybrid bge-m3 + BM25 retrieval, LLM rerank, citation-checked answers. <small>2026</small></td></tr>
+    <tr><td>18/20</td><td><b>Worksheet auto-grader</b>. OCR model reads the handout, Qwen3-4B grades it, red-pen marks go back onto the PDF. <small>2026</small></td></tr>
+    <tr><td>38/40</td><td><b>Smart Pointer</b>. Offline speech-to-text + embedding match highlights the slide element you're talking about. <small>2026</small></td></tr>
+  </tbody>
+</table>
 
-<h2><span class="mono">02</span>RAG &amp; agents</h2>
-<div class="grid">
-  <article class="card wide">
-    <div class="meta mono">2026</div>
-    <h3>HiKorea RAG</h3>
-    <p>Answers Korean immigration and visa questions in Korean and English from 640 official documents. Hybrid retrieval (bge-m3 dense in Chroma + BM25 with a CJK bigram tokenizer, RRF fusion), query decomposition, one-call listwise LLM rerank, and grounded answers checked by a citation verifier.</p>
-    <div class="hit">recall@5 0.706 → 0.824 · 0 invented citations</div>
-    <div class="foot mono"><span>qwen2.5:14b · Ollama · FastAPI · 74 tests</span></div>
-  </article>
-  <article class="card">
-    <div class="meta mono">2026</div>
-    <h3>Worksheet auto-grader</h3>
-    <p>Two-stage pipeline on an 8 GB GPU: Nanonets-OCR2-3B reads the handout, Qwen3-4B grades it, and red-pen marks are written back onto the PDF.</p>
-    <div class="hit">18/20 on held-out judge eval</div>
-  </article>
-  <article class="card">
-    <div class="meta mono">2026</div>
-    <h3>Smart Pointer</h3>
-    <p>Offline, CPU-only presentation assistant. Streaming speech-to-text plus embedding matching highlights the slide element you're talking about.</p>
-    <div class="hit">~38/40 grounding accuracy</div>
-  </article>
-</div>
+<table>
+  <caption>Security</caption>
+  <tbody>
+    <tr><td>10/12</td><td><b>IoT security gateway</b>. RK3588S box with XDP/eBPF filtering, Suricata, an NPU flow autoencoder and an evidence-scored nftables quarantine. <small>2026</small></td></tr>
+    <tr><td>0→89%</td><td><a href="https://github.com/Nodir0705/malware_classifier">Malware classifier robustness</a>. Adversarial attacks broke a 98.95% ResNet50; adversarial retraining brought it back. <small>personal, 2026</small></td></tr>
+  </tbody>
+</table>
 
-<h2><span class="mono">03</span>Security</h2>
-<div class="grid">
-  <article class="card">
-    <div class="meta mono">2026</div>
-    <h3>IoT security gateway</h3>
-    <p>Orange Pi 5 (RK3588S) inline gateway: XDP/eBPF filtering in the kernel, Suricata with 209 IoT rules, a flow autoencoder on the NPU, and detectors for beaconing and DGA DNS. A 60-second evidence window scores each device; 80+ points triggers an nftables quarantine.</p>
-    <div class="hit">10 of 12 simulated attacks caught</div>
-  </article>
-  <article class="card">
-    <div class="meta mono">personal · 2026</div>
-    <h3>Malware classifier robustness</h3>
-    <p>A 98.95% ResNet50 classifier fell to 0% under imperceptible-noise attacks. Adversarial retraining recovered most of it; compared against MalConv and a byte-level transformer.</p>
-    <div class="hit">0% → 89.46% under attack</div>
-    <div class="foot mono"><span>PyTorch · Grad-CAM</span><a href="https://github.com/Nodir0705/malware_classifier">code →</a></div>
-  </article>
-</div>
+<table id="work">
+  <caption>Work</caption>
+  <tbody>
+    <tr><td>2023.04 – now</td><td>AI/ML Engineer at Netvision Telecom (research intern the first 6 months)</td></tr>
+    <tr><td>2025 – now</td><td>Freelance AI/ML Engineer</td></tr>
+    <tr><td>2024</td><td>Capstone mentor, Woosong University. Team placed 1st of 200+</td></tr>
+    <tr><td>2019 – 2023</td><td>B.S. Computer Science, Woosong University</td></tr>
+  </tbody>
+</table>
 
-<h2><span class="mono">04</span>Work</h2>
-<div class="rows">
-  <div class="row"><span class="mono">2023.04 — now</span><div><b>AI/ML Engineer · Netvision Telecom</b><p>Production CV on Jetson: segmentation, waste-truck vision, SAM2 tooling. Joined as a research intern, full-time after 6 months.</p></div></div>
-  <div class="row"><span class="mono">2025 — now</span><div><b>Freelance AI/ML Engineer</b><p>Truck-ID recognition, face-recognition kiosk.</p></div></div>
-  <div class="row"><span class="mono">2024</span><div><b>Capstone mentor · Woosong University</b><p>The team placed 1st of 200+.</p></div></div>
-  <div class="row"><span class="mono">2019 — 2023</span><div><b>B.S. Computer Science · Woosong University</b></div></div>
-</div>
+<p><b>Stack:</b> PyTorch, Ultralytics, OpenCV, SAM2, TensorRT, ONNX, Jetson Orin, Hailo-8, RK3588 NPU, Ollama, Qwen, Chroma, FastAPI, Docker, PostgreSQL, eBPF/XDP, Suricata. Python, C++, SQL.</p>
 
-<h2><span class="mono">05</span>Stack</h2>
-<div class="stack">
-  <em>vision</em><span>PyTorch</span><span>Ultralytics</span><span>OpenCV</span><span>InsightFace</span><span>SAM2</span>
-  <em>edge</em><span>TensorRT</span><span>ONNX</span><span>quantization</span><span>Jetson Orin</span><span>Hailo-8</span><span>RK3588 NPU</span><span>Raspberry Pi</span>
-  <em>llm</em><span>Ollama</span><span>Qwen</span><span>Chroma</span><span>bge-m3</span><span>rerankers</span>
-  <em>serving &amp; systems</em><span>FastAPI</span><span>Docker</span><span>PostgreSQL</span><span>eBPF/XDP</span><span>Suricata</span><span>nftables</span>
-  <em>languages</em><span>Python</span><span>C++</span><span>SQL</span><span>TypeScript</span>
-</div>
+<footer>English fluent · Korean, Russian conversational · E-7 visa · Daejeon, South Korea</footer>
+</main>
 
-<footer class="mono"><span>English fluent · Korean, Russian conversational · E-7 visa</span><span>Daejeon, South Korea</span></footer>
-
-</div>
 </body>
 </html>
