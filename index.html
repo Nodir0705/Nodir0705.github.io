@@ -65,7 +65,6 @@ main>footer{margin-top:calc(3*var(--ok-line-height))}
     <tr><td>10×+</td><td><b>SAM2 video auto-labeler</b>. Prompt the first frame, labels propagate through the whole video, export to YOLO/COCO. <small>Netvision</small></td></tr>
     <tr><td>76→92%</td><td><b>Truck-ID recognition</b>. Found perspective was the main failure mode and added a deskew stage in front of EasyOCR. <small>freelance, 2025</small></td></tr>
     <tr><td>8.6×</td><td><a href="https://github.com/Nodir0705/face-recognition">Face-recognition kiosk</a>. Same pipeline in Python, C++ and on a Hailo-8 NPU: 48 → 5.59 ms per face on a Pi 5. <small>freelance, 2026</small></td></tr>
-    <tr><td>depth</td><td><a href="https://github.com/Nodir0705/depthai-spatial-measurement">Box fill level</a>. OAK-D stereo camera, ROI-averaged depth, two-point calibration.</td></tr>
   </tbody>
 </table>
 
@@ -81,7 +80,7 @@ main>footer{margin-top:calc(3*var(--ok-line-height))}
 <table>
   <caption>Security</caption>
   <tbody>
-    <tr><td>10/12</td><td><b>IoT security gateway</b>. RK3588S box with XDP/eBPF filtering, Suricata, an NPU flow autoencoder and an evidence-scored nftables quarantine. <small>2026</small></td></tr>
+    <tr><td>9/9</td><td><a href="https://github.com/Nodir0705/iot-gateway-security">IoT security gateway</a>. Orange Pi 5 (RK3588S) box with XDP/eBPF filtering, 244 Suricata IoT rules, an NPU flow autoencoder and automatic nftables quarantine. Caught all 9 attack phases in a 47-minute stress test. <small>2026</small></td></tr>
     <tr><td>22→94%</td><td><a href="https://github.com/Nodir0705/malware_classifier">Malware classifier robustness</a>. Changing each byte by at most 2 dropped a 99.5% ResNet50 to 22% under PGD attack; adversarial retraining brought it back to 94%. <small>personal, 2026</small></td></tr>
   </tbody>
 </table>
