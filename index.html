@@ -60,7 +60,7 @@ main>footer{margin-top:calc(3*var(--ok-line-height))}
     <tr><td>25+ fps</td><td><b>Rail-wheel gap measurement</b>. Segmentation + RANSAC boundary extraction + a point stabilizer for curved edges, across 4 concurrent camera streams. <small>Netvision</small></td></tr>
     <tr><td>−30% GPU</td><td><b>Waste truck vision</b>. Swapped the YOLOv8 backbone for ResNet50 and moved its layers onto the Jetson Orin NX DLA. <small>Netvision</small></td></tr>
     <tr><td>10×+</td><td><b>SAM2 video auto-labeler</b>. Prompt the first frame, labels propagate through the whole video, export to YOLO/COCO. <small>Netvision</small></td></tr>
-    <tr><td>76→92%</td><td><b>Truck-ID recognition</b>. Found perspective was the main failure mode and added a deskew stage in front of EasyOCR. <small>freelance, 2025</small></td></tr>
+    <tr><td>76→92%</td><td><b>Smart truck parking &amp; truck-ID OCR</b>. YOLO detects trucks and their ID plates on live RTSP cameras, EasyOCR reads the IDs, and a counting line logs every truck in and out to the backend. Error analysis showed perspective was the main failure mode, so I added a deskew stage before OCR. <small>freelance, 2025</small></td></tr>
     <tr><td>8.6×</td><td><a href="https://github.com/Nodir0705/face-recognition">Face-recognition kiosk</a>. Same pipeline in Python, C++ and on a Hailo-8 NPU: 48 → 5.59 ms per face on a Pi 5. <small>freelance, 2026</small></td></tr>
   </tbody>
 </table>
