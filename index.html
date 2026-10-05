@@ -1,101 +1,166 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Nodirbek Makhtumov</title>
-<meta name="description" content="AI/ML engineer. Computer vision on edge hardware, RAG and agents, network security. Daejeon, South Korea.">
-<meta property="og:title" content="Nodirbek Makhtumov — AI/ML Engineer">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/oatcake@1.0.0">
-<style>
-/* layout adapted from binodil.github.io (sidecar on top of oatcake) */
-:root{--ok-color-fg:#374151}
-nav{display:flex;column-gap:var(--ok-line-height);max-width:50rem;margin:0 auto calc(4*var(--ok-line-height));padding:var(--ok-line-height) calc(2*var(--ok-line-height)) calc(var(--ok-line-height) - 1px);border-bottom:1px solid #ececec;text-transform:lowercase;overflow-x:auto}
-nav>*{flex-shrink:0}
-nav .space{margin-left:auto}
-nav a{color:inherit;text-decoration:none}nav a:hover{text-decoration:underline}
-.bio{display:flex;flex-direction:column;align-items:center;row-gap:var(--ok-line-height);max-width:28rem;margin:0 auto calc(4*var(--ok-line-height));text-align:center}
-.bio>*{margin:0;padding:0}
-.bio a{color:inherit}
-.bio,main{padding:0 calc(.5*var(--ok-line-height))}
-main{max-width:40rem;margin:0 auto}
-table{width:100%;margin:var(--ok-line-height) 0 calc(2*var(--ok-line-height))}
-caption{font-weight:bold;text-align:left}
-td{border-color:#ececec;vertical-align:top}
-table{table-layout:fixed}
-td:first-child{font-weight:bold;width:8.5rem;padding-right:var(--ok-line-height)}
-td b{font-weight:600}
-td small{color:#9ca3af}
-main>footer{margin-top:calc(3*var(--ok-line-height))}
-@media (max-width:50rem){
-  nav{column-gap:calc(.5*var(--ok-line-height));padding:calc(.5*var(--ok-line-height)) calc(.5*var(--ok-line-height)) calc(.5*var(--ok-line-height) - 1px)}
-  .bio{margin-bottom:calc(2*var(--ok-line-height))}
-  td:first-child{width:6.5rem}
-}
-</style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script>
+    (function () {
+      try {
+        var t = localStorage.getItem('theme');
+        if (t === 'dark' || t === 'light') document.documentElement.setAttribute('data-theme', t);
+      } catch (e) {}
+    })();
+  </script>
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#161619" media="(prefers-color-scheme: dark)">
+  <title>Resume | Nodirbek Makhtumov</title>
+  <meta name="description" content="Resume of Nodirbek Makhtumov — AI/ML Engineer; computer vision on edge hardware, NPU deployment, RAG, and network security.">
+  <meta property="og:title" content="Nodirbek Makhtumov — AI/ML Engineer">
+  <meta property="og:description" content="Computer vision on edge hardware, NPU deployment, RAG, and network security. Daejeon, South Korea.">
+  <link rel="canonical" href="https://nodir0705.github.io/">
+  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;600&family=Oswald:wght@600;700&display=swap">
+  <!-- Theme CSS from yakhyo.github.io (MIT, see assets/css/LICENSE) -->
+  <link rel="stylesheet" href="assets/css/main.css">
+  <link rel="stylesheet" href="assets/css/resume.css">
 </head>
-<body>
 
-<header>
-  <nav>
-    <a style="font-weight:bold" href="/">Nodirbek Makhtumov</a>
-    <div class="space"></div>
-    <a href="#projects">Projects</a>
-    <a href="#work">Work</a>
-    <a href="assets/Nodirbek_Makhtumov_Resume.pdf">Resume</a>
-    <a href="https://github.com/Nodir0705">GitHub</a>
-  </nav>
-  <div class="bio">
-    <p>Nodirbek is an AI/ML engineer who puts models on real hardware: Jetsons, NPUs, network gateways. At Netvision Telecom, Daejeon.</p>
-    <p><a href="mailto:stark.developer2877@gmail.com">email</a> · <a href="https://linkedin.com/in/nodirbek-makhtumov-03084a194">linkedin</a> · <a href="assets/Nodirbek_Makhtumov_Resume_KR.pdf">이력서</a></p>
+<body>
+<a class="skip-link" href="#main-content">Skip to content</a>
+<header class="site-header">
+  <div class="wrapper"><a class="site-title" rel="author" href="/" aria-label="Nodirbek Makhtumov — Home">~/nodir<span class="sr-only"> — Nodirbek Makhtumov</span></a><button type="button" class="theme-toggle" aria-label="Toggle dark mode" title="Toggle dark mode">
+      <svg class="theme-icon theme-icon-light" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+      <svg class="theme-icon theme-icon-dark" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+    </button><nav class="site-nav">
+      <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+      <label for="nav-trigger">
+        <span class="menu-icon">
+          <svg viewBox="0 0 18 15" width="18px" height="15px"><path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/></svg>
+        </span>
+      </label>
+      <div class="trigger"><a class="page-link" href="#projects"><span class="nav-slash" aria-hidden="true">/</span>Projects</a><a class="page-link" href="https://github.com/Nodir0705"><span class="nav-slash" aria-hidden="true">/</span>GitHub</a><a class="page-link active" href="/" aria-current="page"><span class="nav-slash" aria-hidden="true">/</span>Resume</a></div>
+    </nav></div>
+</header>
+
+<main id="main-content" class="page-content" aria-label="Content" tabindex="-1">
+  <div class="wrapper">
+    <article class="post"><div class="post-content">
+
+<header class="resume-header">
+  <div class="resume-header-text">
+    <h1 class="resume-name">Nodirbek Makhtumov</h1>
+    <p class="resume-role">AI/ML Engineer</p>
+    <div class="resume-social" aria-label="Profiles">
+      <a href="https://github.com/Nodir0705" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="icon icon-github" aria-hidden="true"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.980-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.910 1.23 3.220 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg></a>
+      <a href="https://linkedin.com/in/nodirbek-makhtumov-03084a194" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="icon icon-linkedin" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+      <a href="mailto:stark.developer2877@gmail.com" aria-label="Email"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-mail" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg></a>
+    </div>
+  </div>
+  <div class="resume-header-actions">
+    <a href="assets/Nodirbek_Makhtumov_Resume.pdf" download="" class="btn btn-primary">
+      Download PDF <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-arrow-down" aria-hidden="true"><path d="M12 5v14"/><path d="m19 12-7 7-7-7"/></svg>
+    </a>
+    <a href="assets/Nodirbek_Makhtumov_Resume_KR.pdf" download="" style="color:var(--text-secondary);font-size:.95rem">이력서 PDF (KR)</a>
   </div>
 </header>
 
-<main>
-<!-- add a project: <tr><td>headline number</td><td>Name. One sentence. <small>context</small></td></tr> -->
+<h2 id="summary">Summary</h2>
+<p>AI/ML Engineer with 3+ years building and shipping production computer vision systems that run on edge hardware. I own the full path: model design and training, TensorRT/ONNX quantization, deployment to NVIDIA Jetson and Hailo-8 / RK3588 NPUs, and the FastAPI and Docker services around them. I validate models with per-class metrics, adversarial robustness tests and per-hardware measurements rather than a single headline accuracy.</p>
 
-<table id="projects">
-  <caption>Computer vision &amp; edge</caption>
-  <tbody>
-    <tr><td>25+ fps</td><td><b>Rail-wheel gap measurement</b>. Segmentation + RANSAC boundary extraction + a point stabilizer for curved edges, across 4 concurrent camera streams. <small>Netvision</small></td></tr>
-    <tr><td>−30% GPU</td><td><b>Waste truck vision</b>. Swapped the YOLOv8 backbone for ResNet50 and moved its layers onto the Jetson Orin NX DLA. <small>Netvision</small></td></tr>
-    <tr><td>10×+</td><td><b>SAM2 video auto-labeler</b>. Prompt the first frame, labels propagate through the whole video, export to YOLO/COCO. <small>Netvision</small></td></tr>
-    <tr><td>76→92%</td><td><a href="https://github.com/Nodir0705/smart-truck-parking">Smart truck parking &amp; truck-ID OCR</a>. YOLO detects trucks and their ID plates on live RTSP cameras, EasyOCR reads the IDs, and a counting line logs every truck in and out to the backend. Error analysis showed perspective was the main failure mode, so I added a deskew stage before OCR. <small>freelance, 2025</small></td></tr>
-    <tr><td>8.6×</td><td><a href="https://github.com/Nodir0705/face-recognition">Face-recognition kiosk</a>. Same pipeline in Python, C++ and on a Hailo-8 NPU: 48 → 5.59 ms per face on a Pi 5. <small>freelance, 2026</small></td></tr>
-  </tbody>
-</table>
-
+<h2 id="skills-summary">Skills Summary</h2>
 <table>
-  <caption>RAG &amp; agents</caption>
+  <thead><tr><th>Category</th><th>Tools &amp; techniques</th></tr></thead>
   <tbody>
-    <tr><td>0.824 R@5</td><td><b>HiKorea RAG</b>. Korean immigration Q&amp;A over 640 official documents: hybrid bge-m3 + BM25 retrieval, LLM rerank, citation-checked answers. <small>2026</small></td></tr>
-    <tr><td>18/20</td><td><b>Worksheet auto-grader</b>. OCR model reads the handout, Qwen3-4B grades it, red-pen marks go back onto the PDF. <small>2026</small></td></tr>
-    <tr><td>38/40</td><td><b>Smart Pointer</b>. Offline speech-to-text + embedding match highlights the slide element you're talking about. <small>2026</small></td></tr>
+    <tr><td>Programming</td><td>Python, C++, SQL, TypeScript</td></tr>
+    <tr><td>ML Frameworks</td><td>PyTorch, TensorFlow, Keras, Ultralytics (YOLO), OpenCV, InsightFace, Hugging Face Transformers, SAM2</td></tr>
+    <tr><td>Computer Vision</td><td>Object detection, semantic / instance segmentation, OCR, multi-object tracking, face recognition (ArcFace)</td></tr>
+    <tr><td>Model Optimization</td><td>Quantization, pruning, TensorRT, ONNX Runtime, DLA offloading, backbone replacement and A/B evaluation</td></tr>
+    <tr><td>Edge Hardware</td><td>NVIDIA Jetson (Orin NX, Orin Nano), Hailo-8 NPU, RK3588 NPU, Raspberry Pi 4/5, Android tablets</td></tr>
+    <tr><td>LLM &amp; RAG</td><td>Ollama, Qwen, hybrid retrieval (bge-m3 + BM25), Chroma, rerankers, citation checking</td></tr>
+    <tr><td>Serving &amp; Systems</td><td>FastAPI, Flask, Docker, PostgreSQL, SQLite, eBPF/XDP, Suricata, nftables, Linux</td></tr>
+    <tr><td>Evaluation</td><td>Per-class metrics, adversarial robustness, Grad-CAM, FPS / latency / jitter benchmarking, W&amp;B, MLflow</td></tr>
   </tbody>
 </table>
 
+<h2 id="work-experience">Work Experience</h2>
+
+<h3 id="ai-ml-engineer">AI/ML Engineer</h3>
+<p><strong>Netvision Telecom</strong> | <strong>April 2023 - Present</strong> | <strong>Daejeon, South Korea</strong></p>
+<ul>
+  <li><strong>Smart Waste Truck Vision:</strong> Built YOLO waste classification and volume estimation for garbage trucks. Replaced the <strong>YOLOv8</strong> backbone with <strong>ResNet50</strong> (1×1 conv adapters into the PANet neck) and moved ResNet layers onto the <strong>Jetson DLA</strong>, cutting GPU memory by <strong>~30%</strong> on Orin NX; deployed on the truck after quantization and <strong>TensorRT</strong> conversion.</li>
+  <li><strong>Rail-Wheel Gap Measurement:</strong> Combined a lightweight segmentation model with <strong>RANSAC</strong> boundary extraction and a custom point-stabilization algorithm for curved edges, served over <strong>FastAPI</strong> with <strong>PostgreSQL</strong> logging at <strong>25+ FPS across 4 concurrent camera streams</strong>.</li>
+  <li><strong>SAM2 Video Auto-Labeling:</strong> Built a tool that propagates labels through a whole video from one first-frame prompt and exports YOLO and COCO datasets, making dataset building <strong>10×+ faster</strong>.</li>
+  <li><strong>Research Intern (Apr - Sep 2023):</strong> Built and deployed YOLO models on Jetson Orin Nano, applied latency optimization and quantization, and collected and labeled training data.</li>
+</ul>
+
+<h3 id="freelance-face">Freelance AI/ML Engineer — Face Recognition Kiosk</h3>
+<p><strong>Contract</strong> | <strong>July 2026</strong> | <strong>Remote</strong></p>
+<ul>
+  <li><strong>Three Pipelines, One Benchmark:</strong> Implemented the same RetinaFace + ArcFace pipeline in <strong>Python</strong>, <strong>C++</strong> and on a <strong>Hailo-8 NPU</strong> and measured them on one Raspberry Pi 5: median latency 48.08 ms → <strong>5.59 ms</strong> (8.6×), jitter ±27 ms → ±0.29 ms (95× tighter).</li>
+  <li><strong>Enrollment &amp; Delivery:</strong> Built a five-pose guided enrollment wizard, then used the benchmarks to choose a <strong>Samsung Galaxy Tab</strong> as the target and shipped on-device inference with offline-first SQLite logging and Google Sheets sync. <a href="https://github.com/Nodir0705/face-recognition">face-recognition</a></li>
+</ul>
+
+<h3 id="freelance-truck">Freelance AI/ML Engineer — Smart Truck Parking</h3>
+<p><strong>Contract</strong> | <strong>September 2025 - November 2025</strong> | <strong>Remote</strong></p>
+<ul>
+  <li><strong>End-to-End System:</strong> Built truck detection, truck-ID recognition and live occupancy streaming solo, with <strong>YOLO</strong> + <strong>ByteTrack</strong> on RTSP cameras and events sent to the backend over REST.</li>
+  <li><strong>Deskewing for OCR:</strong> Error analysis showed perspective distortion was the main failure mode; a deskew stage (contours + perspective transform) in front of <strong>EasyOCR</strong> raised ID accuracy from <strong>76% to 92%</strong>.</li>
+  <li><strong>Open-Source Version:</strong> Published a cleaned version with a rewritten deskew module; on synthetic tilted plates it lifts OCR accuracy from 80.5% to <strong>97.5%</strong>. <a href="https://github.com/Nodir0705/smart-truck-parking">smart-truck-parking</a></li>
+</ul>
+
+<h2 id="projects">Projects</h2>
+<ul>
+  <li><strong><a href="https://github.com/Nodir0705/iot-gateway-security">IoT Security Gateway</a>:</strong> Orange Pi 5 (RK3588S) gateway with <strong>XDP/eBPF</strong> filtering, 244 <strong>Suricata</strong> IoT rules, a flow autoencoder on the <strong>RK3588 NPU</strong> and automatic <strong>nftables</strong> quarantine. Caught <strong>9/9 attack phases</strong> in a 47-minute stress test, with 87/88 expected rules firing.</li>
+  <li><strong><a href="https://github.com/Nodir0705/malware_classifier">Malware Classifier Robustness</a>:</strong> A MalImg ResNet50 at 99.48% fell to <strong>22%</strong> under PGD attack (each byte changed by at most 2); full adversarial retraining brought it back to <strong>94.15%</strong> for a 2.3-point clean-accuracy cost.</li>
+  <li><strong>HiKorea RAG:</strong> Korean immigration Q&amp;A over 640 official documents with hybrid <strong>bge-m3</strong> + <strong>BM25</strong> retrieval, LLM rerank and citation-checked answers; recall@5 0.706 → <strong>0.824</strong> over dense-only.</li>
+  <li><strong>Worksheet Auto-Grader:</strong> Nanonets-OCR2-3B reads the handout, <strong>Qwen3-4B</strong> grades it, and red-pen marks are written back onto the PDF on an 8 GB GPU; 18/20 on a held-out judge eval.</li>
+  <li><strong>Smart Pointer:</strong> Offline, CPU-only presentation assistant: streaming speech-to-text plus embedding matching highlights the slide element being spoken about; ~38/40 grounding accuracy.</li>
+  <li><strong>Capstone Mentor, Woosong University (2024):</strong> Guided a computer-vision team through image processing and YOLO training; the team placed <strong>1st of 200+</strong>.</li>
+</ul>
+
+<h2 id="education">Education</h2>
 <table>
-  <caption>Security</caption>
+  <thead><tr><th><strong>Institution</strong></th><th><strong>Degree</strong></th><th><strong>Duration</strong></th></tr></thead>
   <tbody>
-    <tr><td>9/9</td><td><a href="https://github.com/Nodir0705/iot-gateway-security">IoT security gateway</a>. Orange Pi 5 (RK3588S) box with XDP/eBPF filtering, 244 Suricata IoT rules, an NPU flow autoencoder and automatic nftables quarantine. Caught all 9 attack phases in a 47-minute stress test. <small>2026</small></td></tr>
-    <tr><td>22→94%</td><td><a href="https://github.com/Nodir0705/malware_classifier">Malware classifier robustness</a>. Changing each byte by at most 2 dropped a 99.5% ResNet50 to 22% under PGD attack; adversarial retraining brought it back to 94%. <small>personal, 2026</small></td></tr>
+    <tr><td>Woosong University</td><td>BSc in Computer Science</td><td>2019 - 2023</td></tr>
   </tbody>
 </table>
 
-<table id="work">
-  <caption>Work</caption>
+<h2 id="languages">Languages</h2>
+<table>
+  <thead><tr><th>Language</th><th>Proficiency</th></tr></thead>
   <tbody>
-    <tr><td>2023.04 – now</td><td>AI/ML Engineer at Netvision Telecom (research intern the first 6 months)</td></tr>
-    <tr><td>2025 – now</td><td>Freelance AI/ML Engineer</td></tr>
-    <tr><td>2024</td><td>Capstone mentor, Woosong University. Team placed 1st of 200+</td></tr>
-    <tr><td>2019 – 2023</td><td>B.S. Computer Science, Woosong University</td></tr>
+    <tr><td>English</td><td>Fluent, professional working proficiency</td></tr>
+    <tr><td>Korean</td><td>Conversational</td></tr>
+    <tr><td>Russian</td><td>Conversational</td></tr>
   </tbody>
 </table>
+<p><strong>Visa:</strong> E-7 Special Ability, authorized to work in South Korea.</p>
 
-<p><b>Stack:</b> PyTorch, Ultralytics, OpenCV, SAM2, TensorRT, ONNX, Jetson Orin, Hailo-8, RK3588 NPU, Ollama, Qwen, Chroma, FastAPI, Docker, PostgreSQL, eBPF/XDP, Suricata. Python, C++, SQL.</p>
-
-<footer>English fluent · Korean, Russian conversational · E-7 visa · Daejeon, South Korea</footer>
+    </div></article>
+  </div>
 </main>
 
+<footer class="site-footer h-card">
+  <div class="wrapper">
+    <div class="footer-content">
+      <div class="footer-copyright"><p>© 2026 Nodirbek Makhtumov</p></div>
+      <div class="footer-social"><a href="https://github.com/Nodir0705" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="icon icon-github" aria-hidden="true"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg></a><a href="https://linkedin.com/in/nodirbek-makhtumov-03084a194" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="icon icon-linkedin" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a></div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // dark-mode toggle: flip the effective theme and remember it
+  document.querySelector('.theme-toggle').addEventListener('click', function () {
+    var root = document.documentElement;
+    var dark = root.getAttribute('data-theme') === 'dark' ||
+      (!root.hasAttribute('data-theme') && window.matchMedia('(prefers-color-scheme: dark)').matches);
+    var next = dark ? 'light' : 'dark';
+    root.setAttribute('data-theme', next);
+    try { localStorage.setItem('theme', next); } catch (e) {}
+  });
+</script>
 </body>
 </html>
