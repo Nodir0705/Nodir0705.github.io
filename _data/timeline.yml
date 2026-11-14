@@ -18,7 +18,7 @@
   description: |
     Built the same **SCRFD + ArcFace** pipeline three ways (**Python/CPU**, **C++** port, **Hailo-8 NPU**) to choose hardware by measurement. On a Raspberry Pi 5, detect + embed per face: median **48.08 ms → 5.59 ms (8.6×)**, jitter ±27 ms → ±0.29 ms.
 
-    The C++ port, measured on a Raspberry Pi 4, only cut loop overhead: the model dominates, so the NPU is the lever. Delivered on-device on a **Samsung Galaxy Tab** with offline-first SQLite and Google Sheets sync.
+    The C++ port, measured on a Raspberry Pi 4, only cut loop overhead: the model dominates the cost, so only the NPU changes the result. Delivered on-device on a **Samsung Galaxy Tab** with offline-first SQLite and Google Sheets sync.
   category: "work"
   link: "https://github.com/Nodir0705/face-recognition"
 
