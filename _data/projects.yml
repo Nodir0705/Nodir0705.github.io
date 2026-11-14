@@ -1,0 +1,56 @@
+# Curated projects for /projects.
+#
+# Deliberately a short, hand-picked list rather than a mirror of GitHub. Every
+# number here must match FACTS.md in the resume project. Star counts are NOT
+# stored here: the page can render a live shields.io badge from `repo`, but
+# every repo is new, so all entries set `stars: false` to hide it.
+#
+# Optional per-project keys: post_slug, docs, demo, image + image_alt (plus
+# image_dark for the dark theme, and banner_tagline + install for the lines
+# under the logo; banner_tagline replaces the tagline in the card body), and
+# `stars: false` to hide the badge on a repo too new for the count to say much.
+
+featured:
+  name: "Face Recognition Kiosk"
+  repo: "Nodir0705/face-recognition"
+  tagline: "Attendance kiosk built in Python, C++ and on a Hailo-8 NPU"
+  stars: false
+  description: |
+    SCRFD detection and ArcFace 512-d embeddings, cosine matching over 3 consecutive frames,
+    and a blink + motion liveness check. The same pipeline was built three ways to choose the
+    hardware by measurement: on a Raspberry Pi 5, detect + embed per face takes a median
+    **48.08 ms** on the CPU and **5.59 ms** on the Hailo-8 (8.6× faster, 95× lower jitter).
+    The C++ port, measured on a Raspberry Pi 4, only removed loop overhead, because the model
+    dominates the cost. Delivered running on-device on a Samsung Galaxy Tab, with a five-pose
+    enrollment wizard and offline-first SQLite synced to Google Sheets.
+
+projects:
+  - name: "Smart Truck Parking"
+    repo: "Nodir0705/smart-truck-parking"
+    tagline: "Truck detection, tracking and truck-ID OCR"
+    stars: false
+    description: "YOLO and ByteTrack follow each truck; line crossing gives IN / OUT events. A deskew stage before EasyOCR raised ID accuracy from 76% to 92% on the client's cameras. Open-source version: 80.5% to 97.5% on 200 synthetic tilted plates."
+
+  - name: "Malware Classifier Robustness"
+    repo: "Nodir0705/malware_classifier"
+    tagline: "Adversarial robustness of a malware image classifier"
+    stars: false
+    description: "ResNet50 on MalImg byteplots. PGD-20 with each byte changed by at most 2 drops the baseline from 99.48% to 22.15%; full-network adversarial retraining restores 94.15% under attack for a 2.3-point clean-accuracy cost."
+
+  - name: "IoT Security Gateway"
+    repo: "Nodir0705/iot-gateway-security"
+    tagline: "Four detection layers on an Orange Pi 5, no cloud"
+    stars: false
+    description: "XDP/eBPF filtering, 244 Suricata IoT rules, an NPU flow autoencoder and behavior rules, with nftables quarantine. Detected 9/9 attack phases in a 47-minute stress test. Lab use only (NSL-KDD and synthetic flows)."
+
+  - name: "Sales Quoting Agent"
+    repo: "Nodir0705/sales-quote-agent"
+    tagline: "Email quoting agent with Telegram approval"
+    stars: false
+    description: "Claude reads each price enquiry into a fixed schema, Python computes the quote, and the owner approves every reply on Telegram. Built and run against a real inbox and Telegram in test mode. The code is private; the repo describes the work."
+
+  - name: "Smart Pointer"
+    repo: "Nodir0705/smart-pointer"
+    tagline: "Speech-driven slide highlighting"
+    stars: false
+    description: "Highlights the part of the slide a presenter is talking about; the live loop runs offline on a CPU. 77.3% of pointing steps lit on 7 unseen public decks, scored with a synthetic (TTS) voice; not yet measured on a real presentation. The code is private; the repo describes the work."
