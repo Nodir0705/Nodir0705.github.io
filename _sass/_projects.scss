@@ -1,0 +1,209 @@
+// =============================================================================
+// /projects — curated open-source project list.
+//
+// Everything here resolves through the design tokens in _tokens.scss, so both
+// themes come for free. Two shapes: one featured project with a screenshot, and
+// a responsive grid of the rest.
+// =============================================================================
+
+.project-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1rem;
+  margin: 1rem 0 2.5rem;
+}
+
+.project {
+  display: flex;
+  flex-direction: column;
+  padding: 1.25rem;
+  border: 1px solid $border-light;
+  border-radius: 12px;
+  background: $bg-soft;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.project:hover {
+  border-color: $text-faint;
+  box-shadow: $shadow-sm;
+  transform: translateY(-2px);
+}
+
+// Featured: logo panel on top, body below.
+.project--featured {
+  flex-direction: column;
+  margin: 1.5rem 0 2rem;
+  padding: 0;
+  overflow: hidden;
+}
+
+// A 2:1 panel laid out like a project social card (logo, tagline, install
+// command on a diagonal two-tone ground), in the site's neutrals. Only shown
+// when the featured project sets `image`.
+.project__shot {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 2 / 1;
+  padding: 1.25rem;
+  background: linear-gradient(to bottom right, $bg-soft 50%, $bg-subtle 50%);
+  border-bottom: 1px solid $border-light;
+  line-height: 1.3;
+  text-decoration: none;
+}
+
+// Scoped to beat the `.post-content img` rule in _blog.scss, which would add
+// padding and a corner radius.
+.post-content .project.project--featured .project__shot img {
+  display: block;
+  width: min(400px, 62%);
+  height: auto;
+  margin: 0;
+  padding: 0;
+  border-radius: 0;
+}
+
+.project__banner-tagline {
+  margin-top: 1.4rem;
+  font-size: clamp(0.95rem, 2.6vw, 1.3rem);
+  color: $text-primary;
+  text-align: center;
+}
+
+.project__install {
+  margin-top: 1.4rem;
+  padding: 0.55rem 0.9rem;
+  border: 1px solid $border-light;
+  border-radius: $radius;
+  background: $bg-page;
+  font-family: $font-mono-ui;
+  font-size: $text-sm;
+  color: $text-secondary;
+
+  &::before {
+    content: "$ ";
+    color: $text-faint;
+  }
+}
+
+// Light and dark wordmarks follow the same three states as _theme.scss.
+.post-content .project.project--featured .project__shot .project__logo--dark { display: none; }
+
+:root[data-theme="dark"] .post-content .project.project--featured .project__shot {
+  .project__logo--light { display: none; }
+  .project__logo--dark { display: block; }
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .post-content .project.project--featured .project__shot {
+    .project__logo--light { display: none; }
+    .project__logo--dark { display: block; }
+  }
+}
+
+.project--featured .project__body {
+  padding: 1.25rem;
+}
+
+.project__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-bottom: 0.15rem;
+}
+
+// Scoped under .post-content: the page layout wraps this include in it, and
+// `.post-content h2` would otherwise win on specificity and render these at
+// article-heading size.
+.post-content .project__name {
+  margin: 0;
+  font-size: 1.05rem;
+  font-weight: 600;
+  line-height: 1.35;
+  letter-spacing: normal;
+  color: $text-primary;
+}
+
+.post-content .project--featured .project__name {
+  font-size: 1.3rem;
+}
+
+// Live shields.io badge — height is pinned so a slow or blocked request can't
+// reflow the card once it lands.
+.project__stars {
+  flex-shrink: 0;
+  height: 20px;
+  width: auto;
+  border-radius: 3px;
+}
+
+.post-content .project__tagline {
+  margin: 0.35rem 0 0.6rem;
+  font-size: 0.85rem;
+  color: $text-muted;
+}
+
+.post-content .project__desc {
+  margin: 0;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: $text-secondary;
+  flex-grow: 1;
+}
+
+.post-content .project__desc p {
+  margin: 0;
+}
+
+.project__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.project__links a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.2rem;
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: $text-primary;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.2s ease;
+}
+
+.project__links a:hover {
+  border-bottom-color: $text-primary;
+}
+
+.project__links svg {
+  width: 12px;
+  height: 12px;
+}
+
+@media (min-width: 760px) {
+  .project--featured .project__body {
+    padding: 1.5rem;
+  }
+}
+
+@media (max-width: 600px) {
+
+  .project-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .project {
+    transition: none;
+  }
+
+  .project:hover {
+    transform: none;
+  }
+}

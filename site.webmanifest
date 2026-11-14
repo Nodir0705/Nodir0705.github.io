@@ -1,0 +1,16 @@
+{
+    "name": "Nodirbek Makhtumov - AI/ML Engineer",
+    "short_name": "Nodirbek",
+    "description": "Nodirbek Makhtumov - AI/ML Engineer: computer vision on edge hardware, NPU deployment, RAG, and network security",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#ffffff",
+    "theme_color": "#1e90ff",
+    "icons": [
+        {
+            "src": "/favicon.ico",
+            "sizes": "any",
+            "type": "image/x-icon"
+        }
+    ]
+}

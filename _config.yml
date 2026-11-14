@@ -1,0 +1,91 @@
+# Site Configuration — restart the server after editing this file.
+
+title: Nodirbek Makhtumov
+# jekyll-seo-tag uses this for the home page <title> ("title | tagline").
+tagline: AI/ML Engineer
+email: stark.developer2877@gmail.com
+description: >-
+  I build ML that runs on real hardware: computer vision on Jetsons and NPUs,
+  RAG on local LLMs, and network security on edge devices. Based in Daejeon, Korea.
+
+baseurl: ""
+url: "https://nodir0705.github.io"
+
+author:
+  name: Nodirbek Makhtumov
+  job_title: AI/ML Engineer
+
+# Single source of truth for every social / professional link — update a URL
+# here once and it flows into the footer, landing page, about, and resume.
+# Email is not listed here: it comes from `email:` above (mailto: links).
+profiles:
+  github:        https://github.com/Nodir0705
+  linkedin:      https://linkedin.com/in/nodirbek-makhtumov-03084a194
+
+# jekyll-seo-tag consumes this exact shape — keep it separate from `profiles`;
+# the plugin expects `social.name` and `social.links`.
+social:
+  name: Nodirbek Makhtumov
+  links:
+    - https://github.com/Nodir0705
+    - https://linkedin.com/in/nodirbek-makhtumov-03084a194
+
+lang: en
+locale: en_US
+timezone: Asia/Seoul
+
+theme: minima
+plugins:
+  - jekyll-seo-tag
+  - jekyll-sitemap
+
+header_pages:
+  - _pages/projects.md
+  - _pages/about.md
+  - _pages/resume.md
+
+include:
+  - _pages
+
+# Typewriter titles cycled on the landing page.
+landing_titles:
+  - "AI/ML Engineer"
+  - "Edge Computer Vision"
+  - "RAG on Local LLMs"
+  - "Edge Network Security"
+
+# Link-preview (Open Graph) image for every page.
+defaults:
+  - scope:
+      path: ""
+    values:
+      image:
+        path: /assets/images/landing-page-preview.png
+        width: 1200
+        height: 630
+        alt: Nodirbek Makhtumov personal website landing page
+
+markdown: kramdown
+kramdown:
+  input: GFM
+  auto_ids: true
+  syntax_highlighter: rouge
+
+sass:
+  style: compressed
+  quiet_deps: true
+  verbose: false
+  silence_deprecations:
+    - import
+    - global-builtin
+    - color-functions
+
+exclude:
+  - .sass-cache/
+  - .jekyll-cache/
+  - gemfiles/
+  - Gemfile
+  - Gemfile.lock
+  - node_modules/
+  - vendor/
+  - README.md

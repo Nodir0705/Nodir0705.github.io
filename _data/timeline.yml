@@ -1,0 +1,56 @@
+# Landing-page experience timeline. Rendered newest-first by start `date`
+# (see _includes/timeline.html). `logo` and `link` are optional; every number
+# must match FACTS.md in the resume project.
+
+- date: "2026.10"
+  title: "Freelance AI/ML Engineer — Sales Quoting Agent"
+  company: "Contract · Remote"
+  description: |
+    Email quoting agent for a company that exports insulated sandwich panels. **Claude** reads each enquiry into a fixed schema, **Python** computes the quote from the Excel price list, and the owner approves every reply on **Telegram**. The model never types a price.
+
+    On written test emails: extraction eval **26/26**, **1,513** automated checks passing. Built and run against a real inbox and Telegram in test mode.
+  category: "work"
+  link: "https://github.com/Nodir0705/sales-quote-agent"
+
+- date: "2026.07"
+  title: "Freelance AI/ML Engineer — Face Recognition Kiosk"
+  company: "Contract · Remote"
+  description: |
+    Built the same **SCRFD + ArcFace** pipeline three ways (**Python/CPU**, **C++** port, **Hailo-8 NPU**) to choose hardware by measurement. On a Raspberry Pi 5, detect + embed per face: median **48.08 ms → 5.59 ms (8.6×)**, jitter ±27 ms → ±0.29 ms.
+
+    The C++ port, measured on a Raspberry Pi 4, only cut loop overhead: the model dominates, so the NPU is the lever. Delivered on-device on a **Samsung Galaxy Tab** with offline-first SQLite and Google Sheets sync.
+  category: "work"
+  link: "https://github.com/Nodir0705/face-recognition"
+
+- date: "2025.09"
+  date_end: "2025.11"
+  title: "Freelance AI/ML Engineer — Smart Truck Parking"
+  company: "Contract · Remote"
+  description: |
+    Built solo, end to end: **YOLO** finds trucks and ID plates, **ByteTrack** follows each truck, line crossing gives IN / OUT events, sent to the backend over REST.
+
+    Error analysis showed perspective distortion was the main OCR failure; a deskew stage in front of **EasyOCR** raised ID accuracy from **76% to 92%** on the client's cameras.
+  category: "work"
+  link: "https://github.com/Nodir0705/smart-truck-parking"
+
+- date: "2023.04"
+  date_end: "Present"
+  title: "AI/ML Engineer"
+  company: "Netvision Telecom"
+  description: |
+    Replaced the **YOLOv8** backbone with **ResNet50** in a waste-truck vision model so its layers run on the **Jetson DLA**: **~30%** less GPU memory on Orin NX, so vision and fleet management share one board.
+
+    Rail-wheel gap measurement with segmentation, **RANSAC** and a custom point-stabilization step, served over **FastAPI** at **25+ FPS across 4 concurrent camera streams**.
+
+    Built a **SAM2** video auto-labeling tool that makes dataset construction **10×+ faster**. Joined as a paid research intern in April 2023, full-time since September 2023.
+  category: "work"
+
+- date: "2019"
+  date_end: "2023"
+  title: "BSc in Computer Science"
+  company: "Woosong University"
+  description: |
+    Bachelor's degree in Computer Science, Daejeon.
+
+    Mentored a Woosong capstone computer-vision team in 2024 (image processing, YOLO training); the team placed **1st of 200+** teams.
+  category: "education"

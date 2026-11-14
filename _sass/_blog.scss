@@ -1,0 +1,937 @@
+// =============================================================================
+// Blog — index page (search/filter/post cards) + single-post styles
+// (content typography, code blocks, share row, prev/next nav).
+// =============================================================================
+
+// =====================================================================
+// 1. Blog index page
+// =====================================================================
+// Page titles sit one step above .post-content h2 ($text-xl / 26px) on the
+// global type scale, so every page reads h1 > h2 > h3 > body with the same
+// sizes site-wide. Article titles (.post-title) stay the largest at every
+// width, so the mobile steps here track just below .post-title's own steps
+// (1.875rem ≤600px, 1.625rem ≤480px).
+.page-heading {
+  margin: 0 0 0.25rem;
+  font-size: $text-2xl;
+  font-weight: $weight-semibold;
+  letter-spacing: -0.015em;
+
+  @media (max-width: 600px) { font-size: 1.75rem; }
+  @media (max-width: 480px) { font-size: 1.5rem; }
+}
+
+// Blog index header: small bold heading + one-line tagline.
+.blog-header {
+  margin: $space-xs 0 $space-sm;
+}
+
+.blog-intro {
+  margin: 0;
+  font-size: $text-base;
+  font-weight: $weight-regular;
+  line-height: 1.5;
+  color: $text-muted;
+}
+
+// Search + year filter row
+.search-filter-wrapper {
+  display: flex;
+  gap: 0.75rem;
+  margin: 1.25rem 0 1rem;
+}
+
+.search-container {
+  position: relative;
+  flex: 1;
+
+  #search-input {
+    width: 100%;
+    padding: 0.5rem 0.875rem 0.5rem 2.25rem;
+    font-size: 0.9rem;
+    border: 1px solid $border-light;
+    border-radius: $radius;
+    outline: none;
+    transition: all 0.3s ease;
+    background: $bg-soft;
+    box-sizing: border-box;
+
+    &:focus {
+      border-color: $brand-primary;
+      background: $bg-surface;
+      box-shadow: $shadow-sm;
+    }
+
+    &::placeholder { color: $text-faint; }
+  }
+
+  .search-icon {
+    position: absolute;
+    left: 0.75rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: $text-faint;
+    font-size: 0.9rem;
+    pointer-events: none;
+  }
+}
+
+.post-year-group { margin-top: $space-md; }
+.post-year-group:first-of-type { margin-top: $space-sm; }
+
+.post-year-heading {
+  position: sticky;
+  top: 56px;
+  z-index: 10;
+  font-size: 1.125rem;
+  font-weight: $weight-medium;
+  letter-spacing: 0.02em;
+  color: $text-faint;
+  margin: 0 0 1rem;
+  padding: 0.6rem 0 0.4rem;
+  background: $bg-page;
+  border-bottom: 1px solid $border-light;
+
+  // On phones the year sticky-strip steals vertical space and the index is
+  // short enough not to need it. Let it scroll with the page.
+  @media (max-width: 600px) {
+    position: static;
+  }
+}
+
+// Post list (cards on the blog index). The whole row is a click target: the
+// title's <a> uses ::before to span the parent .post-item.
+.post-list {
+  list-style: none;
+  margin-left: 0;
+
+  .post-item {
+    position: relative;
+    // Bleed the tint 0.75rem past the text on each side so the hover zone has
+    // breathing room while the text stays aligned with the year heading. 0.75rem
+    // stays inside the 15px wrapper gutter, so no horizontal overflow on mobile.
+    margin: 0.25rem -0.75rem;
+    padding: 0.875rem 0.75rem;
+    border-radius: $radius;
+    transition: opacity 0.3s ease, background-color 0.15s ease;
+
+    // The whole row is one click target, so the whole row responds. Hover is
+    // gated behind (hover: hover) so a tap on touch doesn't leave the row stuck
+    // in its hover state; :active is the press feedback on mobile, and
+    // :has(:focus-visible) covers keyboard. All three share one soft tint.
+    @media (hover: hover) {
+      &:hover {
+        background: $bg-soft;
+        .post-link { color: $brand-link; }
+      }
+    }
+
+    &:active { background: $bg-soft; }
+
+    &:has(.post-link:focus-visible) {
+      background: $bg-soft;
+      .post-link { color: $brand-link; }
+    }
+  }
+
+  .post-list-title {
+    margin-bottom: 0.375rem;
+    font-family: $font-sans;
+    font-size: $text-lg;
+    line-height: 1.35;
+    font-weight: $weight-medium;
+    letter-spacing: -0.01em;
+    color: $text-primary;
+
+    .post-link {
+      color: inherit;
+      text-decoration: none;
+      transition: color 0.15s ease;
+
+      // Expand the click target to the full .post-item.
+      &::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border-radius: $radius;
+      }
+
+      // Keyboard focus gets a visible ring tracing the whole row (WCAG AA).
+      &:focus-visible {
+        outline: none;
+
+        &::before {
+          outline: 2px solid $brand-primary;
+          outline-offset: 2px;
+        }
+      }
+    }
+  }
+}
+
+.post-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1.25rem;
+  color: $text-muted;
+  font-size: $text-sm;
+  margin-bottom: 0;
+
+  .meta-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    white-space: nowrap;
+  }
+
+  .meta-updated {
+    color: $text-muted;
+    font-size: 0.825rem;
+  }
+}
+
+.post-excerpt {
+  margin-top: 0.5rem;
+  font-family: $font-sans;
+  color: $text-secondary;
+  line-height: 1.6;
+  font-size: 0.9375rem;
+}
+
+.no-posts {
+  text-align: center;
+  padding: 3rem 0;
+  color: $text-faint;
+  font-size: 1.1rem;
+}
+
+// Blog-index responsive
+@media (max-width: 768px) {
+  .search-filter-wrapper {
+    flex-direction: column;
+    margin: 1.5rem 0 1rem;
+    gap: 0.75rem;
+  }
+
+  .search-container {
+    #search-input {
+      font-size: 0.95rem;
+      padding: 0.65rem 1rem 0.65rem 2.5rem;
+    }
+    .search-icon { font-size: 0.9rem; left: 0.9rem; }
+  }
+}
+
+// =====================================================================
+// 2. Single post page
+// =====================================================================
+
+.post {
+  max-width: 100%;
+}
+
+.post-header .post-title {
+  font-family: $font-sans;
+  font-size: 2.25rem;
+  font-weight: $weight-medium;
+  line-height: 1.2;
+  letter-spacing: -0.022em;
+  margin-bottom: 0.75rem;
+
+  @media (max-width: 600px) {
+    font-size: 1.875rem;
+  }
+}
+
+// "← back to blog" link above the post title — terminal-voiced mono, muted at
+// rest, sharpening on hover while the arrow nudges left along its axis (same
+// directional language as the other arrow buttons).
+.back-to-blog {
+  @include arrow-nudge(-3px, 0);
+
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35em;
+  margin-bottom: 1.25rem;
+  font-family: $font-mono-ui;
+  font-size: $text-chrome;
+  color: $chrome-muted;
+  text-decoration: none;
+  transition: color 0.2s ease;
+
+  .icon {
+    width: 0.9em;
+    height: 0.9em;
+  }
+
+  // Keep the back-link muted after it's been visited (Minima's `a:visited`
+  // blue outranks this class rule otherwise).
+  &:visited { color: $chrome-muted; }
+
+  &:hover {
+    color: $ink-hover;
+    text-decoration: none;
+  }
+}
+
+.post-content {
+  font-family: $font-sans;
+  font-size: 1.0625rem;
+  line-height: 1.7;
+  color: $text-primary;
+
+  h2, h3, h4, h5, h6 {
+    font-family: $font-sans;
+    letter-spacing: -0.02em;
+  }
+  h2 { font-size: $text-xl;   font-weight: $weight-semibold; line-height: 1.3;  margin-top: 2.75rem; margin-bottom: 0.75rem; }
+  h3 { font-size: $text-lg;   font-weight: $weight-medium; line-height: 1.35; margin-top: 2.25rem; margin-bottom: 0.5rem; }
+  h4 { font-size: $text-base; font-weight: $weight-medium; line-height: 1.4;  margin-top: 1.75rem; margin-bottom: 0.5rem; }
+  h5, h6 { font-size: $text-base; font-weight: $weight-medium; }
+
+  p { margin-bottom: 1.25em; }
+
+  code {
+    font-family: $font-mono;
+    font-size: 0.9em;
+    background: $bg-tag;
+    padding: 0.1em 0.35em;
+    border-radius: $radius;
+  }
+  // Code inside <pre> is styled by Minima's rouge block — don't double-pad it.
+  pre code { background: none; padding: 0; font-size: 0.95em; }
+
+  ul, ol {
+    margin-left: 1.5rem;
+    margin-bottom: 1.25em;
+    padding-left: 0.25rem;
+
+    li { margin-bottom: 0.4em; }
+    li > ul, li > ol { margin-top: 0.4em; margin-bottom: 0.4em; }
+  }
+
+  // Blockquote is the only serif element in the post — keep it that way; adding more serif accents dilutes the contrast.
+  blockquote {
+    margin: 1.75em 0;
+    padding: 0.25em 0 0.25em 1.25rem;
+    border-left: 3px solid $brand-primary;
+    font-family: $font-serif;
+    font-size: 1.15rem;
+    color: $text-secondary;
+    font-style: italic;
+
+    p:last-child { margin-bottom: 0; }
+  }
+
+  // Labeled callout boxes — "Key takeaways" summaries and the "Short answer"
+  // capsules in Q&A posts. Distinct from the serif pull-quote above: these are
+  // structured callouts, not quotations, so they drop the serif/italic editorial
+  // voice for the sans body font inside a pixel-frame box, with a mono uppercase
+  // eyebrow for the bold label (the site's mono identity). Genuine unlabeled
+  // quotes keep the serif blockquote style.
+  blockquote.takeaways,
+  blockquote.callout {
+    margin: 1.75em 0;
+    padding: 1.1rem 1.35rem;
+    border: 1px solid $border-light;
+    border-left: 3px solid $brand-primary;
+    border-radius: $radius;
+    background: $bg-soft;
+    font-family: $font-sans;
+    font-size: $text-base;
+    font-style: normal;
+    color: $text-primary;
+    line-height: 1.65;
+
+    > p { margin: 0 0 0.6rem; }
+    > p:last-child { margin-bottom: 0; }
+
+    // Bold label -> mono uppercase eyebrow.
+    > p:first-child > strong:first-child {
+      font-family: $font-mono;
+      font-size: $text-xs;
+      font-weight: $weight-semibold;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: $text-faint;
+    }
+
+    ul {
+      margin: 0;
+      padding-left: 1.15rem;
+    }
+
+    li {
+      margin-bottom: 0.4em;
+      &:last-child { margin-bottom: 0; }
+    }
+  }
+
+  // In "Short answer" capsules the label shares a paragraph with the answer,
+  // so promote it to its own line; takeaways labels already sit alone.
+  blockquote.callout > p:first-child > strong:first-child {
+    display: block;
+    margin-bottom: 0.3rem;
+  }
+
+  // FAQ items: one callout per question so the question and its answer never
+  // run together. Authored as `> **Question?**`, a blank quote line, then the
+  // answer, tagged `{: .faq}`. Same frame as takeaways, plus Q / A markers in
+  // the left gutter so a skimming reader can tell which line is which.
+  blockquote.faq {
+    position: relative;
+    margin: 1.25em 0;
+    padding: 0.95rem 1.2rem 0.95rem 3rem;
+    border: 1px solid $border-light;
+    border-left: 3px solid $brand-primary;
+    border-radius: $radius;
+    background: $bg-soft;
+    font-family: $font-sans;
+    font-size: $text-base;
+    font-style: normal;
+    color: $text-primary;
+    line-height: 1.65;
+
+    > p {
+      position: relative;
+      margin: 0 0 0.55rem;
+    }
+    > p:last-child { margin-bottom: 0; }
+
+    > p::before {
+      position: absolute;
+      left: -1.9rem;
+      top: 0.2em;
+      font-family: $font-mono;
+      font-size: $text-xs;
+      font-weight: $weight-semibold;
+      letter-spacing: 0.08em;
+      color: $text-faint;
+    }
+    > p:first-child::before { content: "Q"; color: $brand-primary; }
+    > p:nth-child(2)::before { content: "A"; }
+
+    // The question is bold in the source; keep one weight, not a double one.
+    > p:first-child { font-weight: $weight-semibold; }
+    > p:first-child > strong { font-weight: inherit; }
+  }
+
+  // Render <hr> as a centered "·  ·  ·" instead of a full-width line.
+  hr {
+    border: 0;
+    margin: 2.5em auto;
+    width: 6rem;
+    text-align: center;
+
+    &::before {
+      content: "\00B7  \00B7  \00B7";
+      letter-spacing: 0.6em;
+      color: $text-faint;
+    }
+  }
+
+  // Prose links only: scoped to text containers so UI components rendered
+  // inside content (buttons, back-links, timeline links, social icon rows)
+  // never inherit the underline and don't need per-component
+  // specificity escapes. :where() keeps specificity at .post-content a level.
+  :where(p, li, td, dd) a {
+    color: $brand-link;              // ink — the underline (not a hue) marks it as a link
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.18em;
+
+    // Minima's `a:visited` is blue (0,1,1) — without this pin a clicked prose
+    // link would turn blue and break the monochrome palette. Keep it ink.
+    &:visited { color: $brand-link; }
+
+    &:hover {
+      color: $brand-primary-hover;
+      text-decoration-thickness: 2px;
+    }
+  }
+
+  img:not(.profile-photo):not(.timeline-logo),
+  video,
+  iframe {
+    max-width: 100%;
+    height: auto;
+    border-radius: $radius;
+  }
+
+  img:not(.profile-photo):not(.timeline-logo) {
+    padding: 0.3%;
+  }
+
+  video,
+  iframe {
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+  }
+
+  // Inline image grids — collapse whitespace so %-width images fit.
+  div[align] { font-size: 0; }
+
+  .media-figure {
+    margin: 1.5em 0;
+
+    img { display: block; padding: 0; }
+
+    figcaption {
+      margin-top: 0.5rem;
+      font-size: 0.8rem;
+      color: $text-muted;
+      text-align: center;
+      line-height: 1.5;
+      font-style: italic;
+    }
+  }
+
+  // Tables — always fill the content width so multi-column comparison tables
+  // line up consistently across a post. Without this, browsers size tables to
+  // their content and adjacent tables end up at different widths.
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5em 0;
+    font-family: $font-sans;
+    font-size: 0.9375rem;
+
+    th, td {
+      padding: 0.5rem 0.75rem;
+      border-bottom: 1px solid $border-light;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    // Header stands off the body with a fill one step up from the page ($bg-tag)
+    // plus a firmer bottom rule, so it reads as a header in both themes without
+    // relying on zebra striping.
+    th {
+      font-weight: $weight-semibold;
+      color: $text-primary;
+      background: $bg-tag;
+      border-bottom: 1px solid $text-faint;
+    }
+
+    // Mobile: drop to `display: block` + horizontal scroll so wide tables
+    // don't force the whole page wider than the viewport. Desktop keeps
+    // the normal table layout so columns share width evenly.
+    @media (max-width: 600px) {
+      display: block;
+      overflow-x: auto;
+    }
+  }
+  // Code blocks: copy button reveals on hover, fades back out.
+  pre {
+    position: relative;
+    border: 1px solid $border-light;
+
+    .copy-btn {
+      position: absolute;
+      top: 0.4rem;
+      right: 0.4rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 1.5rem;
+      height: 1.5rem;
+      padding: 0;
+      background: $surface-overlay;
+      border: 1px solid $border-light;
+      border-radius: $radius;
+      color: $text-muted;
+      cursor: pointer;
+      transition: color 0.15s ease, border-color 0.15s ease, background 0.2s ease;
+
+      svg { width: 0.8rem; height: 0.8rem; display: block; }
+
+      &:hover {
+        background: $bg-surface;
+        color: $brand-primary;
+        border-color: $brand-primary;
+      }
+
+      &.copied {
+        color: $brand-primary;
+        border-color: $brand-primary;
+      }
+    }
+
+  }
+}
+
+
+// Bottom-of-post action row: now holds only the "Edit on GitHub" link
+// (share moved to the top of the post, under the meta line).
+.post-footer-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;   // lone "Edit on GitHub" link sits at the right edge
+  gap: $space-sm;
+  margin: $space-md 0 0;
+  padding: 1.25rem 0 0;
+  border-top: 1px solid $border-light;
+}
+
+.post-share {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+// Top-of-post share row: sits under the meta line and is divided from the
+// article body so it reads as part of the header, not the content.
+.post-share-top {
+  display: flex;          // override .post-share inline-flex so the divider spans the column
+  flex-wrap: wrap;
+  margin: 1.25rem 0 1.5rem;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid $border-light;
+}
+
+.post-share-label {
+  margin-right: 0.15rem;
+  color: $text-muted;
+  font-size: $text-sm;
+}
+
+// Wide screens: float the same share element as a sticky vertical rail in the
+// left gutter, vertically centred. Below this width there isn't enough gutter
+// beside the 820px content column, so it stays the inline row under the meta.
+@media (min-width: 1100px) {
+  .post-share-top {
+    position: fixed;
+    top: 50%;
+    // 410px = $content-width (820px) / 2; then clear the gutter + rail width.
+    left: calc(50% - 410px - 3.75rem);
+    transform: translateY(-50%);
+    flex-direction: column;
+    gap: 0.55rem;
+    margin: 0;
+    padding: 0;
+    border-bottom: 0;
+  }
+
+  .post-share-top .post-share-label {
+    display: none;   // icons only in rail mode — vertical text reads poorly
+  }
+}
+
+// "On this page" TOC. Hidden by default (and on narrower screens there's no
+// gutter beside the 820px column); shown only when the right gutter is wide
+// enough to hold it without crowding the content.
+.post-toc {
+  display: none;
+}
+
+// Shown only when the right gutter is wide enough for the panel without
+// crowding the 820px content column.
+@media (min-width: 1280px) {
+  .post-toc {
+    display: block;
+    position: fixed;
+    top: 6.5rem;
+    // 410px = $content-width (820px) / 2 (the content column's right edge).
+    // Negative nudge keeps the 200px panel + its scrollbar inside a real
+    // 1280px window (page scrollbar eats ~15px of usable width).
+    left: calc(50% + 410px - 4px);
+    width: 200px;
+    max-height: calc(100vh - 9rem);
+    overflow-y: auto;        // long headings wrap; only the list scrolls vertically
+    padding-left: 0.9rem;
+    border-left: 1px solid $border-light;
+  }
+
+  .post-toc-title {
+    margin: 0 0 0.6rem;
+    font-size: $text-xs;
+    font-weight: $weight-semibold;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: $text-muted;
+  }
+
+  .post-toc-list,
+  .post-toc-sublist {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .post-toc-sublist {
+    padding-left: 0.75rem;
+  }
+
+  .post-toc-item {
+    margin: 0.1rem 0;
+    line-height: 1.35;
+  }
+
+  .post-toc-link {
+    display: block;
+    padding: 0.2rem 0;
+    font-size: $text-sm;
+    color: $text-muted;
+    text-decoration: none;
+    border-left: 2px solid transparent;
+    margin-left: -0.9rem;          // align the active bar with the rail border
+    padding-left: 0.9rem;
+    transition: color 0.15s ease, border-color 0.15s ease;
+
+    // Anchor links mark themselves visited on click; keep the rail muted so it
+    // doesn't get stuck on Minima's visited-blue (:hover / .is-active below
+    // still win and turn it brand-blue).
+    &:visited { color: $text-muted; }
+
+    &:hover {
+      color: $brand-primary;
+      text-decoration: none;
+    }
+
+    &.is-active {
+      color: $brand-primary;
+      border-left-color: $brand-primary;
+      font-weight: $weight-semibold;
+    }
+  }
+}
+
+.post-share-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  border: 1px solid $border-light;
+  border-radius: 50%;
+  background: transparent;
+  color: $text-secondary;
+  cursor: pointer;
+  font-size: 0.95rem;
+  text-decoration: none;
+  transition: border-color 0.2s ease, color 0.2s ease, background 0.2s ease;
+
+  &:hover,
+  &:focus {
+    border-color: $brand-primary;
+    color: $brand-primary;
+    text-decoration: none;        // override Minima's default a:hover underline
+  }
+
+  &.copied {
+    border-color: $color-success;
+    color: $color-success;
+  }
+}
+
+// "Copied!" tooltip on the copy-link button, driven by site.js toggling .copied.
+.copy-link-btn::after {
+  content: "Copied!";
+  position: absolute;
+  bottom: calc(100% + 0.4rem);
+  left: 50%;
+  transform: translateX(-50%);
+  background: $btn-solid-bg;
+  color: $btn-solid-fg;
+  padding: 0.2rem 0.5rem;
+  border-radius: $radius;
+  font-size: 0.7rem;
+  font-weight: $weight-semibold;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+}
+
+.copy-link-btn.copied::after { opacity: 1; }
+
+// Quiet "Edit on GitHub" text link, right side of the footer row.
+.post-edit-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.85rem;
+  color: $text-muted;
+  text-decoration: none;
+  transition: color 0.2s ease;
+
+  &:hover {
+    color: $brand-primary;
+    .icon-github { color: $brand-primary; }   // brand-primary on hover instead of GitHub black
+  }
+}
+
+// Previous / next post navigation
+.post-nav {
+  display: flex;
+  justify-content: space-between;
+  gap: $space-sm;
+  margin: $space-md 0 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid $border-light;
+
+  > a,
+  > span {
+    flex: 1 1 0;
+    min-width: 0;            // allow flex children to shrink below their content width
+  }
+
+  a {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    text-decoration: none;
+    color: $text-primary;
+    padding: 0.75rem 1rem;
+    border: 1px solid $border-light;
+    border-radius: $radius;
+    transition: border-color 0.2s ease, color 0.2s ease;
+
+    &:hover {
+      border-color: $brand-primary;
+      color: $brand-primary;
+    }
+  }
+
+  .post-nav-prev { justify-content: flex-start; }
+  .post-nav-next { justify-content: flex-end; }
+
+  .post-nav-label {
+    font-size: 0.9rem;
+    font-weight: $weight-medium;
+    color: inherit;
+    // Truncate long titles instead of pushing the button wider than the viewport.
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    min-width: 0;
+  }
+}
+
+@media (max-width: 600px) {
+  .post-nav { flex-direction: column; }
+}
+
+.reading-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: transparent;
+  z-index: 1000;
+  pointer-events: none;
+}
+
+.reading-progress-bar {
+  height: 100%;
+  width: 0;
+  background: $brand-primary;
+  transition: width 80ms linear;
+}
+
+// -----------------------------------------------------------------------------
+// Mobile "On this page" — collapsible disclosure built by toc.js, shown only
+// below the desktop-rail breakpoint (the fixed .post-toc rail needs ≥1280px).
+// -----------------------------------------------------------------------------
+.post-toc-mobile { display: none; }   // hidden by default; revealed below 1280px
+
+@media (max-width: 1279px) {
+  .post-toc-mobile {
+    display: block;
+    margin: 0 0 2rem;
+    border: 1px solid $border-light;
+    border-radius: $radius;
+    background: $bg-soft;
+
+    .post-toc-mobile-summary {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.75rem 1rem;
+      cursor: pointer;
+      list-style: none;                 // drop the native marker; use our own
+      font-size: $text-xs;
+      font-weight: $weight-semibold;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: $text-muted;
+
+      &::-webkit-details-marker { display: none; }
+      &::after {
+        content: "\25BE";               // ▾ — rotates when open
+        font-size: 0.9rem;
+        transition: transform 0.2s ease;
+      }
+    }
+
+    &[open] .post-toc-mobile-summary::after { transform: rotate(180deg); }
+
+    .post-toc-list,
+    .post-toc-sublist { list-style: none; margin: 0; padding: 0; }
+    .post-toc-list { padding: 0 1rem 0.75rem; }
+    .post-toc-sublist { padding-left: 0.85rem; }
+    .post-toc-item { margin: 0.1rem 0; line-height: 1.4; }
+
+    .post-toc-link {
+      display: block;
+      padding: 0.3rem 0;
+      font-size: $text-sm;
+      color: $text-muted;
+      text-decoration: none;
+
+      &:hover { color: $brand-primary; }
+    }
+  }
+}
+
+// -----------------------------------------------------------------------------
+// Back-to-top button — injected by site.js on post pages, fades in after the
+// reader scrolls down. Sits clear of the left share rail and right TOC rail.
+// -----------------------------------------------------------------------------
+.back-to-top {
+  position: fixed;
+  right: 1.25rem;
+  bottom: 1.25rem;
+  z-index: 90;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  padding: 0;
+  background: $bg-surface;
+  color: $text-primary;
+  border: 1px solid $text-primary;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: $shadow-sm;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(8px);
+  transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+
+  // Arrow nudges up on hover — same directional language as the other buttons.
+  @include arrow-nudge(0, -2px);
+
+  svg {
+    width: 1rem;
+    height: 1rem;
+    display: block;
+  }
+
+  &:hover {
+    color: $ink-hover;
+    border-color: $ink-hover;
+  }
+
+  &.is-visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+}

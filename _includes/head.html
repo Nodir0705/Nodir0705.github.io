@@ -1,0 +1,52 @@
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Theme: apply a saved light/dark choice before first paint (no flash).
+       With no saved choice, the attribute stays unset and CSS follows the OS
+       via prefers-color-scheme. Keep this inline & synchronous, above the CSS. -->
+  <script>
+    (function () {
+      try {
+        var t = localStorage.getItem('theme');
+        if (t === 'dark' || t === 'light') document.documentElement.setAttribute('data-theme', t);
+      } catch (e) {}
+    })();
+  </script>
+  <!-- Chrome tint = $bg-surface (the nav/header + overscroll canvas color, see
+       html { background } in _base.scss), NOT $bg-page — the browser bar sits
+       flush on the nav, so tinting it with the page color shows a subtle band. -->
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#161619" media="(prefers-color-scheme: dark)">
+  {%- if page.noindex -%}
+  <meta name="robots" content="noindex,nofollow">
+  {%- endif -%}
+  {%- capture seo_html -%}{%- seo -%}{%- endcapture -%}
+  {{ seo_html | split: '<script type="application/ld+json">' | first }}
+  {%- include schema.html -%}
+
+  <!-- Google Fonts — loaded via <link> for faster parallel fetch -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;600&family=Oswald:wght@600;700&display=swap">
+  {%- if page.url == '/' -%}
+  <link rel="preload" as="image" href="{{ "/assets/images/avatar.webp" | relative_url }}" fetchpriority="high">
+  {%- endif -%}
+
+  <link rel="stylesheet" href="{{ "/assets/main.css" | relative_url }}">
+  <link rel="icon" type="image/x-icon" href="{{ "/favicon.ico" | relative_url }}">
+  <link rel="manifest" href="{{ "/site.webmanifest" | relative_url }}">
+  {%- if page.custom_css -%}
+    {%- assign css_files = page.custom_css | split: ',' -%}
+    {%- for css in css_files -%}
+    <link rel="stylesheet" href="{{ "/assets/css/" | append: css | strip | append: ".css" | relative_url }}">
+    {%- endfor -%}
+  {%- endif -%}
+  {%- if page.custom_js -%}
+    {%- assign js_files = page.custom_js | split: ',' -%}
+    {%- for js in js_files -%}
+    <script src="{{ "/assets/js/" | append: js | strip | append: ".js" | relative_url }}" defer></script>
+    {%- endfor -%}
+  {%- endif -%}
+</head>
+

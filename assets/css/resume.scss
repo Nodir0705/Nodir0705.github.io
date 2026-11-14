@@ -1,0 +1,138 @@
+---
+---
+@import "tokens";
+
+// =============================================================================
+// Resume page — header, print stylesheet.
+// =============================================================================
+
+// -----------------------------------------------------------------------------
+// Top header: name + role + last-updated + download button + social icons
+// -----------------------------------------------------------------------------
+.resume-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  margin: 0 0 2rem;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid $border-light;
+}
+
+.resume-name {
+  margin: 0 0 0.25rem;
+  font-size: 1.75rem;
+  font-weight: $weight-semibold;
+  line-height: 1.2;
+}
+
+.resume-role {
+  margin: 0 0 0.4rem;
+  color: $text-secondary;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.resume-header-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.75rem;
+}
+
+// Six PDF buttons instead of one: resume and portfolio, EN / KR / UZ, as two
+// rows of three inside the actions column above. They are too wide to sit
+// beside the name, so the column always wraps below it; left-align the rows
+// there (as the <=600px layout below already does).
+.resume-header-actions {
+  align-items: flex-start;
+}
+
+.resume-pdf-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.resume-social {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+
+  a {
+    color: $text-primary;
+    text-decoration: none;
+    transition: color 0.2s ease;
+    font-size: 1.05rem;
+
+    // No lift — color shift only, like every other hover on the site.
+    &:hover { color: $ink-hover; }
+  }
+}
+
+@media (max-width: 600px) {
+  .resume-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .resume-header-actions {
+    align-items: flex-start;
+    width: 100%;
+  }
+}
+
+// -----------------------------------------------------------------------------
+// Print stylesheet — make /resume/ printable as a clean CV.
+// Strips chrome (header nav, footer, announcement, social icons, download
+// button), tightens type, neutralizes colors for ink savings.
+// -----------------------------------------------------------------------------
+@media print {
+  .site-header,
+  .site-footer,
+  .announcement-banner,
+  .resume-header-actions {
+    display: none !important;
+  }
+
+  body {
+    font-size: 10pt;
+    line-height: 1.4;
+    color: black;
+    background: white;
+  }
+
+  a {
+    color: black;
+    text-decoration: none;
+  }
+
+  // Avoid orphan headings: don't break right after a heading.
+  h1, h2, h3 {
+    page-break-after: avoid;
+  }
+
+  // Avoid breaking inside list items / table rows.
+  li, tr {
+    page-break-inside: avoid;
+  }
+
+  // Tighter top margin on the resume itself (chrome is hidden).
+  .resume-header {
+    margin-top: 0;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #999;
+  }
+
+  .resume-name {
+    font-size: 18pt;
+  }
+
+  // Don't carry over hover transforms / box-shadows in print.
+  * {
+    box-shadow: none !important;
+    transform: none !important;
+  }
+}

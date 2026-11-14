@@ -1,0 +1,68 @@
+// =============================================================================
+// Syntax highlighting — light code panels (One Light palette) matching the
+// site's theme. One Light in light mode, One Dark under dark mode — both wired
+// through the $code-* tokens (defined in _tokens.scss so they can flip at
+// runtime), plus roomier padding and a thin scrollbar. Scoped to .post-content;
+// inline code chips keep their style from _blog.scss.
+// =============================================================================
+
+.post-content {
+  // Minima paints the background on both the wrapper and the <pre> — cover both.
+  .highlighter-rouge .highlight,
+  .highlight,
+  pre {
+    background: $code-bg;
+  }
+
+  pre {
+    border: 1px solid $border-light;
+    border-radius: $radius;
+    padding: 1rem 1.25rem;
+    color: $code-fg;
+    line-height: 1.65;
+
+    // Thin, unobtrusive scrollbar for long lines.
+    scrollbar-width: thin;
+    scrollbar-color: $code-scrollbar transparent;
+    &::-webkit-scrollbar { height: 8px; }
+    &::-webkit-scrollbar-thumb { background: $code-scrollbar; border-radius: $radius; }
+    &::-webkit-scrollbar-track { background: transparent; }
+  }
+
+  pre code {
+    color: $code-fg;
+  }
+
+  // Rouge token colors.
+  .highlight {
+    .c, .cm, .c1, .cs, .cd, .cp { color: $code-comment; font-style: italic; }
+
+    .k, .kd, .kn, .kp, .kr, .kv { color: $code-keyword; }
+    .kt                         { color: $code-class; }
+    .o, .ow                     { color: $code-keyword; }
+
+    .s, .sa, .sb, .sc, .sd, .s2,
+    .se, .sh, .si, .sx, .s1, .ss { color: $code-string; }
+    .sr                          { color: $code-cyan; }
+
+    .m, .mb, .mf, .mh, .mi, .mo, .mx, .il { color: $code-number; }
+
+    .nf, .fm       { color: $code-func; }
+    .nc, .nn, .no  { color: $code-class; }
+    .nb, .bp       { color: $code-class; }
+    .nd            { color: $code-func; }
+    .nt            { color: $code-tag; }
+    .na            { color: $code-number; }
+    .nv, .vc, .vg, .vi { color: $code-tag; }
+
+    .p, .pi { color: $code-fg; }
+    .err    { color: $code-tag; background: none; }
+
+    // Diff / generic
+    .gd     { color: $code-tag; background: none; }
+    .gi     { color: $code-string; background: none; }
+    .gh, .gu { color: $code-func; font-weight: $weight-semibold; }
+    .ge     { font-style: italic; }
+    .gs     { font-weight: $weight-semibold; }
+  }
+}

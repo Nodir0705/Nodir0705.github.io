@@ -1,0 +1,29 @@
+---
+# Only the main Sass file needs front matter (the dashes are enough).
+# This file is intentionally just a manifest of imports — keep component styles
+# in their respective _sass/_<name>.scss partial.
+#
+# Order matters: tokens first (so partials can reference them), then partials.
+---
+
+// Override Minima's $content-width *before* importing — Minima declares it
+// with !default so this wins. Site chrome (.wrapper) sizes off this value.
+$content-width: 820px;
+
+// Minima theme reset / layout. Our partials override or extend where needed.
+@import "minima";
+
+// Design tokens (colors, shadows) and shared mixins. Must come before any
+// partial that uses them. `theme` emits the light/dark custom properties the
+// tokens resolve to — main.scss is the only place it's imported so :root ships
+// once (landing.scss / resume.scss reuse the same variables via `tokens`).
+@import "tokens";
+@import "theme";
+@import "mixins";
+
+// Component partials.
+@import "base";       // typography, icons, utilities, nav, footer, announcement, 404
+@import "blog";       // blog index + single-post layout, code blocks, share row
+@import "syntax";     // light code panels + Rouge token colors (overrides Minima)
+@import "timeline";   // experience timeline on the landing page
+@import "projects";   // curated open-source project list on /projects
