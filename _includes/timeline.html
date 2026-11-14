@@ -1,5 +1,9 @@
 <div class="timeline-container">
-  {% assign timeline_entries = site.data.timeline | sort: 'date' | reverse %}
+  {% comment %} Current roles (date_end: "Present") first, then the rest newest first. {% endcomment %}
+  {% assign sorted_entries = site.data.timeline | sort: 'date' | reverse %}
+  {% assign current_entries = sorted_entries | where: 'date_end', 'Present' %}
+  {% assign past_entries = sorted_entries | where_exp: 'e', 'e.date_end != "Present"' %}
+  {% assign timeline_entries = current_entries | concat: past_entries %}
 
   {% if timeline_entries and timeline_entries.size > 0 %}
     {% for entry in timeline_entries %}
