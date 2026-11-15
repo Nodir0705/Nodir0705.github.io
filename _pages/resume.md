@@ -11,7 +11,7 @@ description: "Resume of Nodirbek Makhtumov — AI/ML Engineer; computer vision o
   <div class="resume-header-text">
     <h1 class="resume-name">Nodirbek Makhtumov</h1>
     <p class="resume-role">AI/ML Engineer</p>
-    <div class="resume-social" aria-label="Profiles">
+    <div class="resume-social" role="group" aria-label="Profiles">
       <a href="{{ site.profiles.github }}" target="_blank" rel="noopener noreferrer" aria-label="GitHub">{% include icon.html name="github" %}</a>
       <a href="{{ site.profiles.linkedin }}" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">{% include icon.html name="linkedin" %}</a>
       <a href="mailto:{{ site.email }}" aria-label="Email">{% include icon.html name="email" %}</a>

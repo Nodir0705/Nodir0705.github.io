@@ -18,7 +18,7 @@ projects:
     tagline: "Truck detection, tracking and truck-ID OCR"
     stars: false
     downloads: false
-    description: "YOLO and ByteTrack follow each truck; line crossing gives IN / OUT events. A deskew stage before EasyOCR raised ID accuracy from 76% to 92% on the client's cameras. Open-source version: 80.5% to 97.5% on 200 synthetic tilted plates."
+    description: "YOLO and ByteTrack follow each truck; line crossing gives IN / OUT events. A deskew stage before EasyOCR raised ID accuracy from 76% to 92% on the client’s cameras. Open-source version: 80.5% to 97.5% on 200 synthetic tilted plates."
 
   - name: "Malware Classifier Robustness"
     repo: "Nodir0705/malware_classifier"
