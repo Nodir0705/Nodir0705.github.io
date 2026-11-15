@@ -103,7 +103,6 @@ AI/ML Engineer with 3+ years building and shipping production computer vision sy
 
 | Language | Proficiency                              |
 | -------- | ---------------------------------------- |
-| Uzbek    | Native                                   |
 | English  | C1                                       |
 | Korean   | Intermediate                             |
 | Russian  | Pre-intermediate                         |
