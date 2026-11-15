@@ -22,11 +22,8 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  build-and-deploy:
+  build:
     runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - name: Checkout
         uses: actions/checkout@v7
@@ -58,6 +55,16 @@ jobs:
         with:
           path: _site/
 
+  # Separate job, as in GitHub's Jekyll starter workflow: deploy-pages lists the
+  # run's artifacts once, and in the same job that call sometimes ran before the
+  # artifact uploaded a moment earlier was listed ("Found 0 artifact(s)").
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v5
