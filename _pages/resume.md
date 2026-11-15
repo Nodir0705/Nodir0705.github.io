@@ -56,37 +56,37 @@ AI/ML Engineer with 3+ years building and shipping production computer vision sy
 
 - **Smart Waste Truck Vision:** Built YOLO waste classification and volume estimation for garbage trucks. Replaced the **YOLOv8** backbone with **ResNet50** (1×1 conv adapters into the PANet neck) and moved ResNet layers onto the **Jetson DLA**, cutting GPU memory by **~30%** on Orin NX; deployed on the truck after quantization and **TensorRT** conversion.
 - **Rail-Wheel Gap Measurement:** Combined a lightweight segmentation model with **RANSAC** boundary extraction and a custom point-stabilization algorithm for curved edges, served over **FastAPI** with **PostgreSQL** logging at **25+ FPS across 4 concurrent camera streams**.
-- **SAM2 Video Auto-Labeling:** Built a tool that propagates labels through a whole video from one first-frame prompt and exports YOLO and COCO datasets, making dataset building **10×+ faster**.
+- **SAM2 Video Auto-Labeling:** Built a tool that propagates labels through a whole video from one first-frame prompt and exports YOLO and COCO datasets, making video labeling **10×+ faster**.
 - **Research Intern (Apr - Sep 2023):** Built and deployed YOLO models on Jetson Orin Nano, applied latency optimization and quantization, and collected and labeled training data.
 
-### Freelance AI/ML Engineer — Sales Quoting Agent
+### Freelance AI/ML Engineer — Sales Agent
 {: #freelance-sales}
 
 **Contract** &#124; **October 2026** &#124; **Remote**
 
 - **Quote, Then Ask:** Built an email agent for a company that exports insulated sandwich panels. **Claude** reads the enquiry into a fixed schema, **Python** computes the quote from the Excel price list, Claude writes the reply around the numbers, and the owner gets a **Telegram** card with Approve / Reject. The model never types a price and nothing is sent without Approve.
-- **Tested Before Trusted:** **26/26** on the extraction eval (written test emails), 1,513 automated checks, every AI call priced with a daily cap; run against a real inbox in test mode. [sales-quote-agent](https://github.com/Nodir0705/sales-quote-agent)
+- **Tested Before Trusted:** **26/26** on the extraction eval (written test emails), 1,513 automated checks, every AI call priced with a daily cap; built and run against a real inbox and Telegram in test mode. [sales-quote-agent](https://github.com/Nodir0705/sales-quote-agent)
 
 ### Freelance AI/ML Engineer — Face Recognition Kiosk
 {: #freelance-face}
 
 **Contract** &#124; **July 2026** &#124; **Remote**
 
-- **Three Pipelines, Measured:** Implemented the same SCRFD + ArcFace pipeline in **Python**, **C++** and on a **Hailo-8 NPU** to choose hardware by measurement. On a Raspberry Pi 5, Python on the CPU vs Hailo-8: median latency 48.08 ms → **5.59 ms** (8.6×), jitter ±27 ms → ±0.29 ms (95× tighter). The C++ port, measured on a Pi 4, only cut loop overhead because the model dominates the cost.
-- **Enrollment & Delivery:** Built a five-pose guided enrollment wizard, then used the benchmarks to choose a **Samsung Galaxy Tab** as the target and shipped on-device inference with offline-first SQLite logging and Google Sheets sync. [face-recognition](https://github.com/Nodir0705/face-recognition)
+- **Three Pipelines:** Implemented the same SCRFD + ArcFace pipeline for the Raspberry Pi in **Python**, **C++** and on a **Hailo-8 NPU** to choose hardware by measurement. On a Raspberry Pi 5, Python on the CPU vs Hailo-8: median latency 48.08 ms → **5.59 ms** (8.6×), jitter ±27 ms → ±0.29 ms (95× tighter). The C++ port, on a Pi 4 (approximate figures), only cut loop overhead because the model dominates the cost.
+- **Enrollment & Delivery:** Built a five-pose guided enrollment wizard, then used the benchmarks to choose a **Samsung Galaxy Tab** as the target and shipped on-device inference (BlazeFace + MobileFaceNet) with offline-first SQLite logging (the Raspberry Pi kiosk also syncs to Google Sheets). [face-recognition](https://github.com/Nodir0705/face-recognition)
 
 ### Freelance AI/ML Engineer — Smart Truck Parking
 {: #freelance-truck}
 
 **Contract** &#124; **September 2025 - November 2025** &#124; **Remote**
 
-- **End-to-End System:** Built truck detection, truck-ID recognition and live occupancy streaming solo, with **YOLO** + **ByteTrack** on RTSP cameras and events sent to the backend over REST.
+- **End-to-End System:** Built truck detection, truck-ID recognition and live entry/exit streaming solo, with **YOLO** + **ByteTrack** on RTSP cameras and events sent to the backend over REST.
 - **Deskewing for OCR:** Error analysis showed perspective distortion was the main failure mode; a deskew stage (contours + perspective transform) in front of **EasyOCR** raised ID accuracy from **76% to 92%**.
 - **Open-Source Version:** Published a cleaned version with a rewritten deskew module; on synthetic tilted plates it lifts OCR accuracy from 80.5% to **97.5%**. [smart-truck-parking](https://github.com/Nodir0705/smart-truck-parking)
 
 ## Projects
 
-- **[IoT Security Gateway](https://github.com/Nodir0705/iot-gateway-security):** Orange Pi 5 (RK3588S) gateway with **XDP/eBPF** filtering, 244 **Suricata** IoT rules, a flow autoencoder on the **RK3588 NPU** and automatic **nftables** quarantine. Caught **9/9 attack phases** in a 47-minute stress test, with 87/88 expected rules firing.
+- **[IoT Security Gateway](https://github.com/Nodir0705/iot-gateway-security):** Orange Pi 5 (RK3588S) gateway with **XDP/eBPF** filtering, 244 **Suricata** IoT rules, a flow classifier on the **RK3588 NPU** and automatic **nftables** quarantine. Caught **9/9 attack phases** in a 47-minute stress test, with 87/88 expected rules firing.
 - **[Malware Classifier Robustness](https://github.com/Nodir0705/malware_classifier):** A MalImg ResNet50 at 99.48% fell to **22%** under PGD attack (each byte changed by at most 2); full adversarial retraining brought it back to **94.15%** for a 2.3-point clean-accuracy cost.
 - **HiKorea RAG:** Korean immigration Q&A over 640 official documents with hybrid **bge-m3** + **BM25** retrieval, LLM rerank and citation-checked answers; recall@5 0.706 → **0.824** over dense-only.
 - **Worksheet Auto-Grader:** Nanonets-OCR2-3B reads the handout, **Qwen3-4B** grades it, and red-pen marks are written back onto the PDF on an 8 GB GPU; 18/20 on a held-out judge eval.

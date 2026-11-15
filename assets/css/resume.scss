@@ -82,6 +82,12 @@
     align-items: flex-start;
     width: 100%;
   }
+
+  // main.css turns content tables into scroll blocks on phones; the short
+  // resume tables then stop short of their own border. Keep table layout.
+  .post-content table {
+    display: table;
+  }
 }
 
 // -----------------------------------------------------------------------------

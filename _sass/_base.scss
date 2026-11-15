@@ -344,6 +344,24 @@ pre, code {
     background-color: $bg-surface;
     border-color: $border-light;
   }
+
+  // Minima hides the checkbox with display: none, which also removes it from
+  // the tab order. Hide it visually instead so the keyboard can open the menu.
+  .site-nav .nav-trigger {
+    display: block;
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+  }
+
+  .site-nav .nav-trigger:focus-visible + label {
+    outline: 2px solid $brand-primary;
+    outline-offset: -2px;
+    border-radius: 5px;
+  }
 }
 
 // -----------------------------------------------------------------------------
