@@ -59,7 +59,7 @@ AI/ML Engineer with 3+ years building and shipping production computer vision sy
 - **SAM2 Video Auto-Labeling:** Built a tool that propagates labels through a whole video from one first-frame prompt and exports YOLO and COCO datasets, making video labeling **10×+ faster**.
 - **Research Intern (Apr - Sep 2023):** Built and deployed YOLO models on Jetson Orin Nano, applied latency optimization and quantization, and collected and labeled training data.
 
-### Freelance AI/ML Engineer — Sales Quoting Agent
+### Freelance AI/ML Engineer — Sales Agent
 {: #freelance-sales}
 
 **Contract** &#124; **October 2026** &#124; **Remote**

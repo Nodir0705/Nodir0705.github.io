@@ -34,7 +34,7 @@ projects:
     downloads: false
     description: "XDP/eBPF filtering, 244 Suricata IoT rules, an NPU flow classifier and behavior rules, with nftables quarantine. Detected 9/9 attack phases in a 47-minute stress test. Lab use only (NSL-KDD and synthetic flows)."
 
-  - name: "Sales Quoting Agent"
+  - name: "Sales Agent"
     repo: "Nodir0705/sales-quote-agent"
     tagline: "Email quoting agent with Telegram approval"
     stars: false

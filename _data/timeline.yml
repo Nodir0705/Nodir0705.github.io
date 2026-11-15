@@ -3,7 +3,7 @@
 # must match FACTS.md in the resume project.
 
 - date: "2026.10"
-  title: "Freelance AI/ML Engineer — Sales Quoting Agent"
+  title: "Freelance AI/ML Engineer — Sales Agent"
   company: "Contract · Remote"
   description: |
     Email quoting agent for a company that exports insulated sandwich panels. **Claude** reads each enquiry into a fixed schema, **Python** computes the quote from the Excel price list, and the owner approves every reply on **Telegram**. The model never types a price.
