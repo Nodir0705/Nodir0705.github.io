@@ -13,4 +13,4 @@ I take freelance contracts too. On a smart truck parking system, error analysis 
 
 I care about how a model is measured: per-class metrics, adversarial robustness tests, and latency and jitter on the target device, not a single headline accuracy. My personal projects follow the same habit: an IoT security gateway on an Orange Pi 5, a robustness study of a malware image classifier, and Smart Pointer, which highlights the part of a slide a presenter is talking about. There's more on the [projects page]({{ site.baseurl }}/projects/).
 
-I studied Computer Science at Woosong University in Daejeon (2019 – 2023), and in 2024 I mentored a capstone computer-vision team there that placed 1st of 200+ teams. I speak English at C1 level, Korean at an intermediate level and Russian at a pre-intermediate level. I hold an E-7 visa and am authorized to work in South Korea.
+I studied Computer Science at Woosong University in Daejeon (2019 – 2023), and in 2024 I mentored a capstone computer-vision team there that placed 1st of 200+ teams. I speak English at C1 level, Korean at an intermediate level and Russian at a pre-intermediate level.

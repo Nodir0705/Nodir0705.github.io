@@ -107,4 +107,3 @@ AI/ML Engineer with 3+ years building and shipping production computer vision sy
 | Korean   | Intermediate                             |
 | Russian  | Pre-intermediate                         |
 
-**Visa:** E-7 Special Ability, authorized to work in South Korea.
