@@ -1,10 +1,4 @@
-// =============================================================================
-// /projects — curated open-source project list.
-//
-// Everything here resolves through the design tokens in _tokens.scss, so both
-// themes come for free. Two shapes: one featured project with a screenshot, and
-// a responsive grid of the rest.
-// =============================================================================
+// /projects: grid of open-source project cards
 
 .project-grid {
   display: grid;
@@ -29,94 +23,19 @@
   transform: translateY(-2px);
 }
 
-// Featured: logo panel on top, body below.
-.project--featured {
-  flex-direction: column;
-  margin: 1.5rem 0 2rem;
-  padding: 0;
-  overflow: hidden;
-}
-
-// A 2:1 panel laid out like a project social card (logo, tagline, install
-// command on a diagonal two-tone ground), in the site's neutrals. Only shown
-// when the featured project sets `image`.
-.project__shot {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  aspect-ratio: 2 / 1;
-  padding: 1.25rem;
-  background: linear-gradient(to bottom right, $bg-soft 50%, $bg-subtle 50%);
-  border-bottom: 1px solid $border-light;
-  line-height: 1.3;
-  text-decoration: none;
-}
-
-// Scoped to beat the `.post-content img` rule in _blog.scss, which would add
-// padding and a corner radius.
-.post-content .project.project--featured .project__shot img {
-  display: block;
-  width: min(400px, 62%);
-  height: auto;
-  margin: 0;
-  padding: 0;
-  border-radius: 0;
-}
-
-.project__banner-tagline {
-  margin-top: 1.4rem;
-  font-size: clamp(0.95rem, 2.6vw, 1.3rem);
-  color: $text-primary;
-  text-align: center;
-}
-
-.project__install {
-  margin-top: 1.4rem;
-  padding: 0.55rem 0.9rem;
-  border: 1px solid $border-light;
-  border-radius: $radius;
-  background: $bg-page;
-  font-family: $font-mono-ui;
-  font-size: $text-sm;
-  color: $text-secondary;
-
-  &::before {
-    content: "$ ";
-    color: $text-faint;
-  }
-}
-
-// Light and dark wordmarks follow the same three states as _theme.scss.
-.post-content .project.project--featured .project__shot .project__logo--dark { display: none; }
-
-:root[data-theme="dark"] .post-content .project.project--featured .project__shot {
-  .project__logo--light { display: none; }
-  .project__logo--dark { display: block; }
-}
-
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) .post-content .project.project--featured .project__shot {
-    .project__logo--light { display: none; }
-    .project__logo--dark { display: block; }
-  }
-}
-
-.project--featured .project__body {
-  padding: 1.25rem;
-}
-
 .project__head {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 0.75rem;
+  gap: 0.4rem;
   margin-bottom: 0.15rem;
 }
 
-// Scoped under .post-content: the page layout wraps this include in it, and
-// `.post-content h2` would otherwise win on specificity and render these at
-// article-heading size.
+// Keeps the name on the left when the head holds more than one badge.
+.post-content .project__head .project__name { margin-right: auto; }
+
+// Scoped under .post-content (the page layout wraps the include in it), or
+// `.post-content h2` wins on specificity and renders these at article-heading size.
 .post-content .project__name {
   margin: 0;
   font-size: 1.05rem;
@@ -126,12 +45,7 @@
   color: $text-primary;
 }
 
-.post-content .project--featured .project__name {
-  font-size: 1.3rem;
-}
-
-// Live shields.io badge — height is pinned so a slow or blocked request can't
-// reflow the card once it lands.
+// Live shields.io badge; pinned height so a slow or blocked request can't reflow the card.
 .project__stars {
   flex-shrink: 0;
   height: 20px;
@@ -183,12 +97,6 @@
 .project__links svg {
   width: 12px;
   height: 12px;
-}
-
-@media (min-width: 760px) {
-  .project--featured .project__body {
-    padding: 1.5rem;
-  }
 }
 
 @media (max-width: 600px) {
